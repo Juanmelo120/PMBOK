@@ -1,0 +1,66 @@
+# Gestor PMBOK 8 — API + interfaz + PostgreSQL, todo en contenedores.
+# Arrancar:  docker compose up -d --build
+# Parar:     docker compose down            (añade -v para borrar también los datos)
+# La app queda en http://localhost:3000
+#
+# Los valores por defecto de abajo sirven para probar en local. Para un uso
+# real, copia .env.docker.example a .env (junto a este archivo) y cambia las
+# claves — docker compose lo carga solo.
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres_admin_2026}
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${PORT:-3000}:3000"
+    environment:
+      PORT: 3000
+      # 0.0.0.0: dentro del contenedor hace falta para aceptar las conexiones
+      # reenviadas por Docker (el servidor por defecto solo escucha en loopback).
+      HOST: 0.0.0.0
+
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: ${PGDATABASE:-pmbok8}
+      PGUSER: ${PGUSER:-pmbok8_app}
+      PGPASSWORD: ${PGPASSWORD:-pmbok8_app_2026}
+      PGADMIN_USER: postgres
+      PGADMIN_PASSWORD: ${POSTGRES_PASSWORD:-postgres_admin_2026}
+
+      JWT_SECRETO: ${JWT_SECRETO:-bd7d10b4c57dd8429d05fc00e59a6688f7458e325b8bc13375b63f1f5aa8ebd6da4350062ce413df0bcb48dcd1ac831c}
+      JWT_EXPIRA_HORAS: ${JWT_EXPIRA_HORAS:-12}
+
+      ADMIN_CORREO: ${ADMIN_CORREO:-admin@pmbok.local}
+      ADMIN_CLAVE: ${ADMIN_CLAVE:-admin123}
+
+      REGISTRO_ABIERTO: ${REGISTRO_ABIERTO:-true}
+      REGISTRO_ROL: ${REGISTRO_ROL:-director}
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:3000/api/salud"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  pgdata:

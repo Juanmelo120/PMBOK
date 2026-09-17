@@ -1,0 +1,21 @@
+# Dependencias
+node_modules/
+
+# Secretos y configuración local
+backend/.env
+.env
+.claude/settings.local.json
+# Enlaces simbólicos con rutas absolutas a .agents/skills
+.claude/skills/
+
+# Registros y temporales
+*.log
+npm-debug.log*
+backend/tests/e2e/resultados/
+backend/test-results/
+playwright-report/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

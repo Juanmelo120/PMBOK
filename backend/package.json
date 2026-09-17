@@ -1,0 +1,37 @@
+{
+  "name": "pmbok8-backend",
+  "version": "1.0.0",
+  "description": "API REST y base de datos PostgreSQL del Gestor PMBOK 8",
+  "private": true,
+  "type": "commonjs",
+  "main": "src/servidor.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/servidor.js",
+    "dev": "node --watch src/servidor.js",
+    "db:migrar": "node db/migrar.js",
+    "db:semilla": "node db/semilla.js",
+    "db:reiniciar": "node db/migrar.js --reiniciar && node db/semilla.js",
+    "test": "node --test --test-concurrency=1 --test-reporter=spec tests/aceptacion",
+    "bd:iniciar": "scripts\\postgres.cmd iniciar",
+    "bd:detener": "scripts\\postgres.cmd detener",
+    "bd:estado": "scripts\\postgres.cmd estado",
+    "test:e2e": "playwright test",
+    "humo": "node scripts/humo.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "multer": "^2.4.0",
+    "pg": "^8.23.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0"
+  }
+}

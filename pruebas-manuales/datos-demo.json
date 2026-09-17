@@ -1,0 +1,2038 @@
+{
+  "version": 1,
+  "formato": "pmbok8-gestor",
+  "exportado": "2026-09-17T00:34:43.944Z",
+  "sesion": null,
+  "usuarios": [
+    {
+      "id": "u-admin",
+      "nombre": "Administrador",
+      "correo": "admin@pmbok.local",
+      "rol": "admin",
+      "activo": true,
+      "debeCambiarClave": false,
+      "creado": 1789605282413,
+      "actualizado": 1789605283049
+    },
+    {
+      "id": "u-ana",
+      "nombre": "Ana Torres",
+      "correo": "ana@demo.local",
+      "rol": "ejecutor",
+      "activo": true,
+      "debeCambiarClave": true,
+      "creado": 1789605282953,
+      "actualizado": null
+    },
+    {
+      "id": "u-carlos",
+      "nombre": "Carlos Rivas",
+      "correo": "carlos@demo.local",
+      "rol": "miembro",
+      "activo": true,
+      "debeCambiarClave": true,
+      "creado": 1789605282864,
+      "actualizado": null
+    },
+    {
+      "id": "u-laura",
+      "nombre": "Laura Gómez",
+      "correo": "laura@demo.local",
+      "rol": "director",
+      "activo": true,
+      "debeCambiarClave": false,
+      "creado": 1789605282767,
+      "actualizado": 1789605283052
+    },
+    {
+      "id": "u-pedro",
+      "nombre": "Pedro Salas",
+      "correo": "pedro@demo.local",
+      "rol": "miembro",
+      "activo": true,
+      "debeCambiarClave": true,
+      "creado": 1789605283038,
+      "actualizado": null
+    }
+  ],
+  "permisos": [
+    {
+      "id": "perm-carlos-sede",
+      "usuarioId": "u-carlos",
+      "ambito": "proyecto",
+      "refId": "proy-sede",
+      "nivel": "ver",
+      "creado": 1789605283679,
+      "actualizado": null
+    }
+  ],
+  "portafolios": [
+    {
+      "id": "pf-infra",
+      "nombre": "Infraestructura y sedes",
+      "descripcion": "Obras, adecuaciones y equipamiento de oficinas.",
+      "creado": 1789605283148,
+      "actualizado": null
+    },
+    {
+      "id": "pf-digital",
+      "nombre": "Transformación digital",
+      "descripcion": "Iniciativas que llevan la atención al cliente a canales digitales.",
+      "creado": 1789605283140,
+      "actualizado": null
+    }
+  ],
+  "programas": [
+    {
+      "id": "pg-canales",
+      "portafolioId": "pf-digital",
+      "nombre": "Canales digitales",
+      "descripcion": "Portal, app y chat de atención.",
+      "creado": 1789605283155,
+      "actualizado": null
+    }
+  ],
+  "proyectos": [
+    {
+      "id": "proy-portal",
+      "nombre": "Portal de autoservicio para clientes",
+      "descripcion": "Portal web donde los clientes consultan facturas, descargan certificados y abren solicitudes sin llamar al centro de contacto.",
+      "metodologia": "agil",
+      "portafolioId": "pf-digital",
+      "programaId": "pg-canales",
+      "rocaId": "roca-portal",
+      "inicio": "2026-07-06",
+      "fin": "2026-12-18",
+      "presupuesto": 180000000,
+      "moneda": "COP",
+      "estado": "activo",
+      "directorId": "u-laura",
+      "wip": 3,
+      "fases": [
+        {
+          "id": "fase-0ab9266f-0ade-4d30-a40c-2967da9e9a01",
+          "orden": 1,
+          "nombre": "Sprint 0 — Preparación"
+        },
+        {
+          "id": "fase-1b1c0fd9-8319-4d7d-9484-6e0939776dc0",
+          "orden": 2,
+          "nombre": "Sprints de desarrollo (iterativos)"
+        },
+        {
+          "id": "fase-b87270f5-bd29-4952-a892-e5210933ff1a",
+          "orden": 3,
+          "nombre": "Release"
+        }
+      ],
+      "orden": {},
+      "hitos": [
+        {
+          "id": "h1",
+          "fecha": "2026-07-10",
+          "nombre": "Acta firmada",
+          "critico": true
+        },
+        {
+          "id": "h2",
+          "fecha": "2026-09-04",
+          "nombre": "MVP en ambiente de pruebas",
+          "critico": true
+        },
+        {
+          "id": "h3",
+          "fecha": "2026-10-30",
+          "nombre": "Piloto con 1.000 clientes",
+          "critico": true
+        },
+        {
+          "id": "h4",
+          "fecha": "2026-12-11",
+          "nombre": "Lanzamiento general",
+          "critico": false
+        }
+      ],
+      "dod": [
+        "Código revisado por otra persona",
+        "Pruebas automáticas en verde",
+        "Criterios de aceptación verificados por el PO",
+        "Desplegado en ambiente de pruebas"
+      ],
+      "calidad": null,
+      "creado": 1789605283269,
+      "actualizado": 1789605283292
+    },
+    {
+      "id": "proy-sede",
+      "nombre": "Adecuación del piso 4 de la sede Bogotá",
+      "descripcion": "Obra civil, red y mobiliario para 60 puestos de trabajo en el piso 4.",
+      "metodologia": "predictivo",
+      "portafolioId": "pf-infra",
+      "programaId": null,
+      "rocaId": "roca-sede",
+      "inicio": "2026-05-04",
+      "fin": "2026-11-27",
+      "presupuesto": 420000000,
+      "moneda": "COP",
+      "estado": "activo",
+      "directorId": "u-admin",
+      "wip": 3,
+      "fases": [
+        {
+          "id": "fase-fa96b2fa-0e10-4b6d-bc84-475c54cf240e",
+          "orden": 1,
+          "nombre": "Inicio"
+        },
+        {
+          "id": "fase-dc644c15-8da4-4cd1-834f-4725e946203d",
+          "orden": 2,
+          "nombre": "Planificación"
+        },
+        {
+          "id": "fase-2f319c24-e09b-44cb-bcbf-8efcae915622",
+          "orden": 3,
+          "nombre": "Ejecución"
+        },
+        {
+          "id": "fase-46d752e6-f7ff-4609-a7fa-3f7f42cd4c72",
+          "orden": 4,
+          "nombre": "Cierre"
+        }
+      ],
+      "orden": {
+        "p-gob-06": "cierre"
+      },
+      "hitos": [
+        {
+          "id": "h1",
+          "fecha": "2026-06-05",
+          "nombre": "Diseños aprobados",
+          "critico": true
+        },
+        {
+          "id": "h2",
+          "fecha": "2026-08-28",
+          "nombre": "Obra civil terminada",
+          "critico": true
+        },
+        {
+          "id": "h3",
+          "fecha": "2026-09-30",
+          "nombre": "Red certificada",
+          "critico": true
+        },
+        {
+          "id": "h4",
+          "fecha": "2026-11-20",
+          "nombre": "Mudanza del equipo",
+          "critico": false
+        }
+      ],
+      "dod": null,
+      "calidad": null,
+      "creado": 1789605283659,
+      "actualizado": 1789605283771
+    },
+    {
+      "id": "proy-mesa",
+      "nombre": "Mesa de ayuda interna (Kanban)",
+      "descripcion": "Flujo continuo de solicitudes de TI.",
+      "metodologia": "kanban",
+      "portafolioId": "pf-digital",
+      "programaId": null,
+      "rocaId": null,
+      "inicio": "2026-08-01",
+      "fin": "2027-01-29",
+      "presupuesto": 35000000,
+      "moneda": "COP",
+      "estado": "activo",
+      "directorId": "u-laura",
+      "wip": 2,
+      "fases": [
+        {
+          "id": "fase-cb575047-292f-41b3-a775-38b8f2448347",
+          "orden": 1,
+          "nombre": "Preparación"
+        },
+        {
+          "id": "fase-3cb19f86-d74d-45f5-b853-354209307aaa",
+          "orden": 2,
+          "nombre": "Flujo continuo"
+        },
+        {
+          "id": "fase-b5999e31-eada-4849-bd4c-85f9fd668564",
+          "orden": 3,
+          "nombre": "Cierre"
+        }
+      ],
+      "orden": {},
+      "hitos": [],
+      "dod": null,
+      "calidad": null,
+      "creado": 1789605283918,
+      "actualizado": null
+    }
+  ],
+  "miembros": [
+    {
+      "id": "dcbf0cc8-7cab-4611-a951-4ef681f8d308",
+      "proyectoId": "proy-portal",
+      "usuarioId": "u-laura",
+      "rol": "lider",
+      "creado": 1789605283269,
+      "actualizado": null
+    },
+    {
+      "id": "12c92a04-1aa0-4f8f-a4ce-241448bf30ab",
+      "proyectoId": "proy-portal",
+      "usuarioId": "u-carlos",
+      "rol": "equipo",
+      "creado": 1789605283300,
+      "actualizado": null
+    },
+    {
+      "id": "3ea29389-cf44-468e-8d58-57cae9e1b976",
+      "proyectoId": "proy-portal",
+      "usuarioId": "u-ana",
+      "rol": "ejecutor",
+      "creado": 1789605283305,
+      "actualizado": null
+    },
+    {
+      "id": "47830361-5d6f-4390-acdd-60c42dd27a82",
+      "proyectoId": "proy-portal",
+      "usuarioId": "u-admin",
+      "rol": "po",
+      "creado": 1789605283310,
+      "actualizado": null
+    },
+    {
+      "id": "4b7cbe40-e45f-4f1d-8145-f0d386a9e7e3",
+      "proyectoId": "proy-sede",
+      "usuarioId": "u-admin",
+      "rol": "lider",
+      "creado": 1789605283659,
+      "actualizado": null
+    },
+    {
+      "id": "c7c34f0b-8fb4-428b-99a7-ff307b36fbf5",
+      "proyectoId": "proy-sede",
+      "usuarioId": "u-ana",
+      "rol": "ejecutor",
+      "creado": 1789605283671,
+      "actualizado": null
+    },
+    {
+      "id": "067d93f4-be1f-4b9a-b166-92961e80fbc5",
+      "proyectoId": "proy-sede",
+      "usuarioId": "u-laura",
+      "rol": "observador",
+      "creado": 1789605283675,
+      "actualizado": null
+    },
+    {
+      "id": "58dec733-527c-4144-8e85-6d635737ce3b",
+      "proyectoId": "proy-mesa",
+      "usuarioId": "u-laura",
+      "rol": "lider",
+      "creado": 1789605283918,
+      "actualizado": null
+    }
+  ],
+  "procesos": [
+    {
+      "id": "196c3b71-be82-4716-b09b-fb18681f54c8",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-gob-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283316,
+      "creado": 1789605283316,
+      "actualizado": null
+    },
+    {
+      "id": "fe3f887b-0a89-4506-935a-d4124bdc5557",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-int-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283321,
+      "creado": 1789605283321,
+      "actualizado": null
+    },
+    {
+      "id": "df67478a-845e-47e7-8b92-4838b8056794",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-alc-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283324,
+      "creado": 1789605283324,
+      "actualizado": null
+    },
+    {
+      "id": "e86767e7-e9c2-4def-aa38-4e446795246c",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-alc-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283328,
+      "creado": 1789605283328,
+      "actualizado": null
+    },
+    {
+      "id": "14155ef5-6a42-4df9-b0de-6b316391cc96",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-alc-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283331,
+      "creado": 1789605283331,
+      "actualizado": null
+    },
+    {
+      "id": "b6c51d14-b34f-401b-b7b7-1338cd175873",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-cro-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283335,
+      "creado": 1789605283335,
+      "actualizado": null
+    },
+    {
+      "id": "d4b4918b-d148-4643-92b2-55614aaeb564",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-fin-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283338,
+      "creado": 1789605283338,
+      "actualizado": null
+    },
+    {
+      "id": "eecdce2d-3eb4-41aa-bfcf-cd74111aab5d",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-int-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283342,
+      "creado": 1789605283342,
+      "actualizado": null
+    },
+    {
+      "id": "7fb90dc6-525c-4809-a7a2-49480c080035",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-rie-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283346,
+      "creado": 1789605283346,
+      "actualizado": null
+    },
+    {
+      "id": "a88aaf02-bc2e-4b54-affe-c71599fb1913",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-rie-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283349,
+      "creado": 1789605283349,
+      "actualizado": null
+    },
+    {
+      "id": "faec6059-3c28-4c00-adfa-f2160d343728",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-alc-04",
+      "estado": "iniciado",
+      "notas": "En curso: revisar en la reunión del lunes.",
+      "fecha": 1789605283353,
+      "creado": 1789605283353,
+      "actualizado": null
+    },
+    {
+      "id": "6dcbd32d-ca15-4b56-9723-17ea5bb3793c",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-rie-03",
+      "estado": "iniciado",
+      "notas": "En curso: revisar en la reunión del lunes.",
+      "fecha": 1789605283356,
+      "creado": 1789605283356,
+      "actualizado": null
+    },
+    {
+      "id": "f686414e-69e5-4e2d-9efa-a5cba76c88dd",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-gob-04",
+      "estado": "iniciado",
+      "notas": "En curso: revisar en la reunión del lunes.",
+      "fecha": 1789605283360,
+      "creado": 1789605283360,
+      "actualizado": null
+    },
+    {
+      "id": "452e4f56-e6e1-4dbf-a8ad-4e439ff6f0f6",
+      "proyectoId": "proy-portal",
+      "procesoId": "p-gob-03",
+      "estado": "omitido",
+      "notas": "No hay compras externas: el equipo es interno.",
+      "fecha": 1789605283364,
+      "creado": 1789605283364,
+      "actualizado": null
+    },
+    {
+      "id": "359b267d-224e-4bf1-95eb-f27ff52d2ced",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-gob-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283687,
+      "creado": 1789605283687,
+      "actualizado": null
+    },
+    {
+      "id": "f579145f-e9c9-4fcf-a33f-f5110173b6e1",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-int-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283690,
+      "creado": 1789605283690,
+      "actualizado": null
+    },
+    {
+      "id": "5337f0bd-0a83-4529-9088-9bea839c7bc7",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-gob-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283693,
+      "creado": 1789605283693,
+      "actualizado": null
+    },
+    {
+      "id": "24e1c553-5f42-446b-940c-936785ced738",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-gob-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283697,
+      "creado": 1789605283697,
+      "actualizado": null
+    },
+    {
+      "id": "962b7dc0-9ea2-4116-b425-77a8400246ce",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-alc-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283700,
+      "creado": 1789605283700,
+      "actualizado": null
+    },
+    {
+      "id": "bcba2e5d-45be-4329-9465-cca8d662e205",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-alc-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283703,
+      "creado": 1789605283703,
+      "actualizado": null
+    },
+    {
+      "id": "3b40ddaa-694a-4983-af83-e1f3a748d269",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-alc-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283706,
+      "creado": 1789605283706,
+      "actualizado": null
+    },
+    {
+      "id": "aa105254-2434-40e0-9301-fb6a1fba5331",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-alc-04",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283710,
+      "creado": 1789605283710,
+      "actualizado": null
+    },
+    {
+      "id": "da693056-1869-4a67-9efc-16af6ef63492",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-cro-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283713,
+      "creado": 1789605283713,
+      "actualizado": null
+    },
+    {
+      "id": "ad6e2835-b818-4677-b70d-e70adfe20c4c",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-cro-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283716,
+      "creado": 1789605283716,
+      "actualizado": null
+    },
+    {
+      "id": "49673388-6be8-4c39-ac55-69624cca8c95",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-fin-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283719,
+      "creado": 1789605283719,
+      "actualizado": null
+    },
+    {
+      "id": "e4a3781c-79e8-4ae8-a689-06ccda2075d7",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-fin-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283722,
+      "creado": 1789605283722,
+      "actualizado": null
+    },
+    {
+      "id": "5ace5163-d418-4c72-ac40-06cf9c2c8318",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-fin-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283725,
+      "creado": 1789605283725,
+      "actualizado": null
+    },
+    {
+      "id": "c96438b9-8b7f-46da-9b70-9bfb488dfb04",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-int-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283729,
+      "creado": 1789605283729,
+      "actualizado": null
+    },
+    {
+      "id": "6bfd7c01-b08e-4c18-9f05-42e46018a8b8",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-int-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283733,
+      "creado": 1789605283733,
+      "actualizado": null
+    },
+    {
+      "id": "8544075c-f23d-408e-adde-94edfa04e0aa",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rec-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283737,
+      "creado": 1789605283737,
+      "actualizado": null
+    },
+    {
+      "id": "9c7e3ac6-fb05-43e1-8808-d9ba60870fd9",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rec-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283740,
+      "creado": 1789605283740,
+      "actualizado": null
+    },
+    {
+      "id": "b26b16f1-4d30-4e27-92b4-d62753a353fa",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rie-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283744,
+      "creado": 1789605283744,
+      "actualizado": null
+    },
+    {
+      "id": "eda122e1-d805-4e55-b717-c881d0cd949e",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rie-02",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283748,
+      "creado": 1789605283748,
+      "actualizado": null
+    },
+    {
+      "id": "dcadadd5-b956-46f5-862b-752ea5d38578",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rie-03",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283751,
+      "creado": 1789605283751,
+      "actualizado": null
+    },
+    {
+      "id": "cd4a2c3c-c80d-4cac-8403-843cce3ce20f",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rie-04",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283755,
+      "creado": 1789605283755,
+      "actualizado": null
+    },
+    {
+      "id": "4c2c24ba-3a0d-4cd6-aa5a-816e4d130bf6",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-gob-04",
+      "estado": "iniciado",
+      "notas": "",
+      "fecha": 1789605283758,
+      "creado": 1789605283758,
+      "actualizado": null
+    },
+    {
+      "id": "0209acc9-1ca8-4390-a82d-60777f3b17f8",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-rec-03",
+      "estado": "iniciado",
+      "notas": "",
+      "fecha": 1789605283762,
+      "creado": 1789605283762,
+      "actualizado": null
+    },
+    {
+      "id": "f196e0d9-9d12-4977-9b84-ba81f0f340c9",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-gob-07",
+      "estado": "iniciado",
+      "notas": "",
+      "fecha": 1789605283765,
+      "creado": 1789605283765,
+      "actualizado": null
+    },
+    {
+      "id": "2f0ae5f0-6fab-40c1-9d40-e55e06f1b183",
+      "proyectoId": "proy-sede",
+      "procesoId": "p-fin-04",
+      "estado": "iniciado",
+      "notas": "",
+      "fecha": 1789605283767,
+      "creado": 1789605283767,
+      "actualizado": null
+    },
+    {
+      "id": "1f99116a-560c-4d9e-8062-ecb2f8c4c517",
+      "proyectoId": "proy-mesa",
+      "procesoId": "p-gob-01",
+      "estado": "completado",
+      "notas": "",
+      "fecha": 1789605283942,
+      "creado": 1789605283942,
+      "actualizado": null
+    }
+  ],
+  "documentos": [
+    {
+      "id": "31dc3669-2ac4-4397-8cb8-6129ebb26d33",
+      "proyectoId": "proy-sede",
+      "artefactoId": "art-lista-hitos",
+      "nombre": "Lista de Hitos",
+      "categoria": "cronograma",
+      "version": 1,
+      "estado": "revision",
+      "procesoId": "p-cro-02",
+      "contenido": {
+        "0": [
+          [
+            "Diseños aprobados",
+            "05/06/2026",
+            "Obligatorio",
+            "Firma de la gerencia"
+          ],
+          [
+            "Obra civil terminada",
+            "28/08/2026",
+            "Obligatorio",
+            "Acta de interventoría"
+          ],
+          [
+            "Red certificada",
+            "30/09/2026",
+            "Obligatorio",
+            "Informe de certificación"
+          ]
+        ]
+      },
+      "autorId": "u-admin",
+      "aprobado": null,
+      "creado": 1789605283825,
+      "actualizado": 1789605283835
+    },
+    {
+      "id": "794c8d74-b4a5-41ad-8416-8c4f838ef5e2",
+      "proyectoId": "proy-sede",
+      "artefactoId": "art-declaracion-alcance",
+      "nombre": "Declaración del Alcance del Proyecto",
+      "categoria": "alcance",
+      "version": 1,
+      "estado": "aprobado",
+      "procesoId": "p-alc-03",
+      "contenido": {
+        "0": "Piso 4 adecuado con 60 puestos, 2 salas de reuniones y cocina.",
+        "1": [
+          [
+            "Obra civil",
+            "Acta de recibo sin pendientes",
+            "Interventoría"
+          ],
+          [
+            "Red de datos",
+            "Certificación categoría 6A de 120 puntos",
+            "TI"
+          ],
+          [
+            "Mobiliario",
+            "60 puestos instalados y verificados",
+            "Administración"
+          ]
+        ],
+        "2": "Equipos de cómputo\nTelefonía"
+      },
+      "autorId": "u-admin",
+      "aprobado": 1789605283821,
+      "creado": 1789605283804,
+      "actualizado": 1789605283821
+    },
+    {
+      "id": "b52105fb-8faf-4d5d-8667-e74cf942502f",
+      "proyectoId": "proy-sede",
+      "artefactoId": "art-acta-proyecto",
+      "nombre": "Acta de Constitución del Proyecto",
+      "categoria": "gobernanza",
+      "version": 1,
+      "estado": "aprobado",
+      "procesoId": "p-gob-01",
+      "contenido": {
+        "0": "La sede tiene 180 personas en espacio para 140; el piso 4 está vacío y permite 60 puestos más.",
+        "1": "Habilitar 60 puestos antes del 27/11/2026",
+        "3": "Incluye obra civil, red, climatización y mobiliario. No incluye equipos de cómputo.",
+        "5": "420.000.000 COP",
+        "8": "Jorge Díaz, Gerente administrativo"
+      },
+      "autorId": "u-admin",
+      "aprobado": 1789605283800,
+      "creado": 1789605283774,
+      "actualizado": 1789605283800
+    },
+    {
+      "id": "073262bf-e8cb-4be4-a34c-3bad169606c9",
+      "proyectoId": "proy-portal",
+      "artefactoId": "art-backlog",
+      "nombre": "Backlog del Producto",
+      "categoria": "alcance",
+      "version": 1,
+      "estado": "revision",
+      "procesoId": "p-alc-02",
+      "contenido": {
+        "0": [
+          [
+            "H-01",
+            "Como cliente quiero iniciar sesión con mi correo para ver mis datos",
+            "Entra en menos de 5 s; bloqueo tras 5 intentos",
+            "5",
+            "1"
+          ],
+          [
+            "H-02",
+            "Como cliente quiero ver mis facturas para no llamar",
+            "Últimos 12 meses; descarga PDF",
+            "8",
+            "2"
+          ],
+          [
+            "H-03",
+            "Como cliente quiero descargar certificados",
+            "PDF firmado; menos de 10 s",
+            "5",
+            "3"
+          ]
+        ],
+        "1": "Valor para el cliente primero; después, reducción de llamadas."
+      },
+      "autorId": "u-laura",
+      "aprobado": null,
+      "creado": 1789605283433,
+      "actualizado": 1789605283446
+    },
+    {
+      "id": "9ed0abb5-5f7d-488a-9a28-45ad3b960c07",
+      "proyectoId": "proy-portal",
+      "artefactoId": "art-registro-supuestos",
+      "nombre": "Registro de Supuestos",
+      "categoria": "gobernanza",
+      "version": 1,
+      "estado": "borrador",
+      "procesoId": "p-gob-01",
+      "contenido": {
+        "0": [
+          [
+            "El sistema de facturación expone una API",
+            "Hay que construir un extractor nocturno",
+            "Carlos Rivas",
+            "Confirmado"
+          ],
+          [
+            "Los clientes tienen correo registrado",
+            "No pueden crear cuenta",
+            "Laura Gómez",
+            "Pendiente"
+          ]
+        ],
+        "1": [
+          [
+            "Fecha de lanzamiento 11/12/2026",
+            "Campaña comercial de fin de año",
+            "Sin holgura en el último sprint"
+          ]
+        ]
+      },
+      "autorId": "u-laura",
+      "aprobado": null,
+      "creado": 1789605283420,
+      "actualizado": 1789605283429
+    },
+    {
+      "id": "73db3520-6558-468c-8af2-ec1d1ae34a57",
+      "proyectoId": "proy-portal",
+      "artefactoId": "art-acta-proyecto",
+      "nombre": "Acta de Constitución del Proyecto",
+      "categoria": "gobernanza",
+      "version": 1,
+      "estado": "aprobado",
+      "procesoId": "p-gob-01",
+      "contenido": {
+        "0": "El centro de contacto recibe 18.000 llamadas al mes; el 55 % son consultas de facturas y certificados que el cliente podría resolver solo. Cada llamada cuesta 9.500 COP.",
+        "1": "Reducir las llamadas por consultas de facturas un 40 % antes del 31/12/2026\nTener 1.000 clientes piloto activos antes del 30/10/2026",
+        "2": "NPS del portal ≥ 45 en la encuesta de noviembre\nDisponibilidad del portal ≥ 99,5 % mensual",
+        "3": "Incluye: inicio de sesión, facturas, certificados y solicitudes. No incluye: pagos en línea ni app móvil.",
+        "4": [
+          [
+            "Acta firmada",
+            "10/07/2026",
+            "Firma del patrocinador"
+          ],
+          [
+            "MVP en pruebas",
+            "04/09/2026",
+            "Tres trámites funcionando"
+          ],
+          [
+            "Piloto",
+            "30/10/2026",
+            "1.000 clientes activos"
+          ]
+        ],
+        "5": "180.000.000 COP",
+        "6": "La integración con el sistema de facturación se retrasa\nBaja adopción de los clientes piloto",
+        "7": "Decide cambios de hasta 10.000.000 COP o una semana de holgura; por encima, escala al comité.",
+        "8": "María Pérez, Vicepresidenta de Servicio al Cliente"
+      },
+      "autorId": "u-laura",
+      "aprobado": 1789605283416,
+      "creado": 1789605283368,
+      "actualizado": 1789605283416
+    }
+  ],
+  "archivos": [],
+  "riesgos": [
+    {
+      "id": "a3a5234d-7a7b-45d6-b9e8-bf26034441be",
+      "proyectoId": "proy-portal",
+      "titulo": "La API de facturación no soporta la carga del piloto → caídas del portal",
+      "p": 4,
+      "i": 4,
+      "estrategia": "mitigar",
+      "respuesta": "Caché de facturas de 24 h y prueba de carga antes del piloto.",
+      "responsableId": "u-carlos",
+      "estado": "activo",
+      "creado": 1789605283451,
+      "actualizado": null
+    },
+    {
+      "id": "3b150ced-404f-41bb-936b-818149325fb3",
+      "proyectoId": "proy-portal",
+      "titulo": "Los clientes piloto no adoptan el portal",
+      "p": 3,
+      "i": 4,
+      "estrategia": "",
+      "respuesta": "",
+      "responsableId": null,
+      "estado": "activo",
+      "creado": 1789605283457,
+      "actualizado": null
+    },
+    {
+      "id": "184814fd-3731-41a9-8c81-bea2bdbcc3ee",
+      "proyectoId": "proy-portal",
+      "titulo": "Rotación de un desarrollador clave",
+      "p": 2,
+      "i": 3,
+      "estrategia": "aceptar",
+      "respuesta": "Documentar y hacer revisiones cruzadas.",
+      "responsableId": "u-laura",
+      "estado": "activo",
+      "creado": 1789605283462,
+      "actualizado": null
+    },
+    {
+      "id": "b9cf7764-a659-4119-80e3-7b1c30e6db22",
+      "proyectoId": "proy-portal",
+      "titulo": "Oportunidad: reutilizar el inicio de sesión de la intranet",
+      "p": 3,
+      "i": 3,
+      "estrategia": "explotar",
+      "respuesta": "Validar con seguridad informática.",
+      "responsableId": "u-carlos",
+      "estado": "activo",
+      "creado": 1789605283466,
+      "actualizado": null
+    },
+    {
+      "id": "1c92d8ce-fa21-4a5e-a7bf-918892f7072b",
+      "proyectoId": "proy-sede",
+      "titulo": "Retraso del proveedor de mobiliario importado → mudanza aplazada",
+      "p": 4,
+      "i": 4,
+      "estrategia": "transferir",
+      "respuesta": "Cláusula de penalidad del 1 % semanal en el contrato.",
+      "responsableId": "u-ana",
+      "estado": "activo",
+      "creado": 1789605283838,
+      "actualizado": null
+    },
+    {
+      "id": "8e71ad68-50c2-4c30-a794-f43c144043ef",
+      "proyectoId": "proy-sede",
+      "titulo": "Hallazgo de humedad estructural al demoler",
+      "p": 2,
+      "i": 5,
+      "estrategia": "mitigar",
+      "respuesta": "Inspección previa con ingeniero estructural.",
+      "responsableId": "u-admin",
+      "estado": "cerrado",
+      "creado": 1789605283842,
+      "actualizado": null
+    },
+    {
+      "id": "ea1e1d38-4ad8-4f91-ad45-51c8a63c3fbf",
+      "proyectoId": "proy-sede",
+      "titulo": "Subida del precio del cobre en el cableado",
+      "p": 3,
+      "i": 4,
+      "estrategia": "",
+      "respuesta": "",
+      "responsableId": null,
+      "estado": "activo",
+      "creado": 1789605283847,
+      "actualizado": null
+    }
+  ],
+  "interesados": [
+    {
+      "id": "5aead113-429f-47ab-9774-87f994be62fa",
+      "proyectoId": "proy-portal",
+      "nombre": "María Pérez",
+      "rol": "Patrocinadora",
+      "poder": 5,
+      "influencia": 5,
+      "actual": "partidario",
+      "deseado": "lider",
+      "estrategia": "Informe quincenal de 15 minutos con avance y decisiones pendientes.",
+      "creado": 1789605283471,
+      "actualizado": null
+    },
+    {
+      "id": "c2dc9a82-4548-4b76-929c-9beab7f5021e",
+      "proyectoId": "proy-portal",
+      "nombre": "Jefe del centro de contacto",
+      "rol": "Usuario interno",
+      "poder": 3,
+      "influencia": 4,
+      "actual": "reticente",
+      "deseado": "partidario",
+      "estrategia": "Mostrarle cómo baja la carga de sus agentes con datos del piloto.",
+      "creado": 1789605283479,
+      "actualizado": null
+    },
+    {
+      "id": "529b133a-24fa-406b-83e9-b3d2099ba745",
+      "proyectoId": "proy-portal",
+      "nombre": "Clientes piloto",
+      "rol": "Usuarios finales",
+      "poder": 2,
+      "influencia": 3,
+      "actual": "desconocedor",
+      "deseado": "partidario",
+      "estrategia": "Correo de invitación y encuesta tras el primer uso.",
+      "creado": 1789605283484,
+      "actualizado": null
+    },
+    {
+      "id": "2be94a10-21f5-4e9b-8cd5-39181625169d",
+      "proyectoId": "proy-sede",
+      "nombre": "Jorge Díaz",
+      "rol": "Patrocinador",
+      "poder": 5,
+      "influencia": 4,
+      "actual": "partidario",
+      "deseado": "partidario",
+      "estrategia": "Comité mensual con curva de valor ganado.",
+      "creado": 1789605283851,
+      "actualizado": null
+    },
+    {
+      "id": "90e17856-61f7-46b5-95b7-2e969c319fd5",
+      "proyectoId": "proy-sede",
+      "nombre": "Vecinos del piso 3",
+      "rol": "Afectados por el ruido",
+      "poder": 1,
+      "influencia": 2,
+      "actual": "reticente",
+      "deseado": "neutral",
+      "estrategia": "",
+      "creado": 1789605283855,
+      "actualizado": null
+    }
+  ],
+  "cambios": [
+    {
+      "id": "e19b6a91-3974-416a-b659-7b5a0b327de6",
+      "proyectoId": "proy-portal",
+      "titulo": "Añadir descarga masiva de facturas",
+      "descripcion": "Clientes empresariales piden descargar un año completo.",
+      "solicitante": "Jefe del centro de contacto",
+      "impacto": "+5 puntos, un sprint más",
+      "decision": "pendiente",
+      "creado": 1789605283490,
+      "actualizado": null
+    },
+    {
+      "id": "f4e6f48b-56bf-46fc-800b-b73dd1a5d72c",
+      "proyectoId": "proy-sede",
+      "titulo": "Cambiar alfombra por piso vinílico",
+      "descripcion": "Mantenimiento más barato.",
+      "solicitante": "Administración",
+      "impacto": "+12.000.000 COP, sin impacto en plazo",
+      "decision": "aprobado",
+      "creado": 1789605283859,
+      "actualizado": null
+    },
+    {
+      "id": "7cb22d8e-ee7b-497d-bde4-e0610d745d57",
+      "proyectoId": "proy-sede",
+      "titulo": "Añadir una tercera sala de reuniones",
+      "descripcion": "",
+      "solicitante": "Gerencia comercial",
+      "impacto": "+25.000.000 COP y 2 semanas",
+      "decision": "rechazado",
+      "creado": 1789605283863,
+      "actualizado": null
+    }
+  ],
+  "lecciones": [
+    {
+      "id": "a80095db-11cf-4141-9fef-1e9bac478bd2",
+      "proyectoId": "proy-portal",
+      "situacion": "El Sprint 1 entregó menos de lo comprometido",
+      "causa": "Historias sin criterios de aceptación claros",
+      "recomendacion": "No aceptar historias en el sprint sin criterios verificables",
+      "dominio": "alcance",
+      "creado": 1789605283498,
+      "actualizado": null
+    },
+    {
+      "id": "a5610eb8-3328-4266-81f6-b7ceafe5cd25",
+      "proyectoId": "proy-sede",
+      "situacion": "La demolición generó quejas del piso 3",
+      "causa": "No se avisó el horario de ruido",
+      "recomendacion": "Publicar el horario de trabajos ruidosos con una semana de antelación",
+      "dominio": "interesados",
+      "creado": 1789605283867,
+      "actualizado": null
+    }
+  ],
+  "tareas": [
+    {
+      "id": "t-s0-1",
+      "proyectoId": "proy-portal",
+      "sprintId": "0d336e4f-136c-4dca-a114-082b5a9ed89e",
+      "titulo": "Configurar repositorio y ambientes",
+      "puntos": 3,
+      "fechaLimite": null,
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 1,
+      "creado": 1789605283512,
+      "actualizado": null
+    },
+    {
+      "id": "t-11",
+      "proyectoId": "proy-portal",
+      "sprintId": null,
+      "titulo": "Abrir solicitudes de servicio desde el portal",
+      "puntos": 8,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "backlog",
+      "prioridad": 1,
+      "creado": 1789605283635,
+      "actualizado": null
+    },
+    {
+      "id": "3692b8cc-1c2a-46c3-9840-0cb0c12f282d",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Instalar climatización",
+      "puntos": 8,
+      "fechaLimite": "2026-09-25",
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "curso",
+      "prioridad": 1,
+      "creado": 1789605283870,
+      "actualizado": null
+    },
+    {
+      "id": "e4f273b4-c8cb-43ea-8937-ead978d80cce",
+      "proyectoId": "proy-mesa",
+      "sprintId": null,
+      "titulo": "Alta de 12 cuentas nuevas",
+      "puntos": null,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "curso",
+      "prioridad": 1,
+      "creado": 1789605283923,
+      "actualizado": null
+    },
+    {
+      "id": "t-1",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-1",
+      "titulo": "H-01 Inicio de sesión con correo",
+      "puntos": 5,
+      "fechaLimite": null,
+      "responsableId": "u-carlos",
+      "criterios": "Entra en menos de 5 s",
+      "estado": "hecho",
+      "prioridad": 2,
+      "creado": 1789605283539,
+      "actualizado": null
+    },
+    {
+      "id": "t-12",
+      "proyectoId": "proy-portal",
+      "sprintId": null,
+      "titulo": "Encuesta de satisfacción tras el primer uso",
+      "puntos": 3,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "backlog",
+      "prioridad": 2,
+      "creado": 1789605283641,
+      "actualizado": null
+    },
+    {
+      "id": "bc3ae897-956b-4037-acbf-ef31e0e9ef79",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Tender cableado de red",
+      "puntos": 13,
+      "fechaLimite": "2026-09-22",
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "curso",
+      "prioridad": 2,
+      "creado": 1789605283875,
+      "actualizado": null
+    },
+    {
+      "id": "27f74413-8ea4-40f4-9590-da6ca40b78d6",
+      "proyectoId": "proy-mesa",
+      "sprintId": null,
+      "titulo": "Cambiar impresora del piso 2",
+      "puntos": null,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "curso",
+      "prioridad": 2,
+      "creado": 1789605283927,
+      "actualizado": null
+    },
+    {
+      "id": "t-2",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-1",
+      "titulo": "Bloqueo tras 5 intentos fallidos",
+      "puntos": 3,
+      "fechaLimite": null,
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 3,
+      "creado": 1789605283547,
+      "actualizado": null
+    },
+    {
+      "id": "t-13",
+      "proyectoId": "proy-portal",
+      "sprintId": null,
+      "titulo": "Descarga masiva de facturas (pendiente de aprobar)",
+      "puntos": 5,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "backlog",
+      "prioridad": 3,
+      "creado": 1789605283648,
+      "actualizado": null
+    },
+    {
+      "id": "61ba0787-c7ea-4624-afbb-cbed03afa986",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Certificar puntos de red",
+      "puntos": 3,
+      "fechaLimite": "2026-09-30",
+      "responsableId": "u-admin",
+      "criterios": "",
+      "estado": "pendiente",
+      "prioridad": 3,
+      "creado": 1789605283879,
+      "actualizado": null
+    },
+    {
+      "id": "91dca013-5444-4e6c-87e7-519e4f035a26",
+      "proyectoId": "proy-mesa",
+      "sprintId": null,
+      "titulo": "Licencias de ofimática vencidas",
+      "puntos": null,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "pendiente",
+      "prioridad": 3,
+      "creado": 1789605283933,
+      "actualizado": null
+    },
+    {
+      "id": "t-3",
+      "proyectoId": "proy-portal",
+      "sprintId": null,
+      "titulo": "Recuperar contraseña por correo",
+      "puntos": 5,
+      "fechaLimite": null,
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "backlog",
+      "prioridad": 4,
+      "creado": 1789605283553,
+      "actualizado": 1789605283561
+    },
+    {
+      "id": "17d99ed0-6377-4b33-b1e4-347433ac706a",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Recibir mobiliario",
+      "puntos": 5,
+      "fechaLimite": "2026-10-23",
+      "responsableId": null,
+      "criterios": "",
+      "estado": "pendiente",
+      "prioridad": 4,
+      "creado": 1789605283884,
+      "actualizado": null
+    },
+    {
+      "id": "2b6fd9a3-ca81-43fd-a426-e26d34d6c161",
+      "proyectoId": "proy-mesa",
+      "sprintId": null,
+      "titulo": "VPN lenta en casa",
+      "puntos": null,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 4,
+      "creado": 1789605283937,
+      "actualizado": null
+    },
+    {
+      "id": "t-4",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-2",
+      "titulo": "H-02 Listado de facturas de 12 meses",
+      "puntos": 8,
+      "fechaLimite": null,
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 5,
+      "creado": 1789605283575,
+      "actualizado": null
+    },
+    {
+      "id": "32555968-faaa-40ef-8b1d-b44f1ec9d02a",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Pintura y acabados",
+      "puntos": 5,
+      "fechaLimite": "2026-09-11",
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "revision",
+      "prioridad": 5,
+      "creado": 1789605283888,
+      "actualizado": null
+    },
+    {
+      "id": "t-5",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-2",
+      "titulo": "Descarga de factura en PDF",
+      "puntos": 3,
+      "fechaLimite": null,
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 6,
+      "creado": 1789605283581,
+      "actualizado": null
+    },
+    {
+      "id": "20717d0f-2c14-4036-b6eb-47fbbb4e64a4",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Demolición y obra civil",
+      "puntos": 21,
+      "fechaLimite": null,
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 6,
+      "creado": 1789605283892,
+      "actualizado": null
+    },
+    {
+      "id": "t-6",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-2",
+      "titulo": "Recuperar contraseña por correo (arrastrada)",
+      "puntos": 5,
+      "fechaLimite": null,
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 7,
+      "creado": 1789605283587,
+      "actualizado": null
+    },
+    {
+      "id": "ac264968-3887-46ad-b16a-621df2dcebf8",
+      "proyectoId": "proy-sede",
+      "sprintId": null,
+      "titulo": "Plan de mudanza",
+      "puntos": 3,
+      "fechaLimite": null,
+      "responsableId": null,
+      "criterios": "",
+      "estado": "backlog",
+      "prioridad": 7,
+      "creado": 1789605283898,
+      "actualizado": null
+    },
+    {
+      "id": "t-7",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-3",
+      "titulo": "H-03 Descarga de certificados",
+      "puntos": 5,
+      "fechaLimite": "2026-09-17",
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "curso",
+      "prioridad": 8,
+      "creado": 1789605283609,
+      "actualizado": null
+    },
+    {
+      "id": "t-8",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-3",
+      "titulo": "Firma digital del PDF",
+      "puntos": 5,
+      "fechaLimite": "2026-09-16",
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "revision",
+      "prioridad": 9,
+      "creado": 1789605283617,
+      "actualizado": null
+    },
+    {
+      "id": "t-9",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-3",
+      "titulo": "Prueba de carga de la API de facturación",
+      "puntos": 3,
+      "fechaLimite": "2026-09-18",
+      "responsableId": "u-carlos",
+      "criterios": "",
+      "estado": "pendiente",
+      "prioridad": 10,
+      "creado": 1789605283623,
+      "actualizado": null
+    },
+    {
+      "id": "t-10",
+      "proyectoId": "proy-portal",
+      "sprintId": "sp-3",
+      "titulo": "Plantilla del correo de invitación al piloto",
+      "puntos": 2,
+      "fechaLimite": null,
+      "responsableId": "u-ana",
+      "criterios": "",
+      "estado": "hecho",
+      "prioridad": 11,
+      "creado": 1789605283630,
+      "actualizado": null
+    }
+  ],
+  "sprints": [
+    {
+      "id": "0d336e4f-136c-4dca-a114-082b5a9ed89e",
+      "proyectoId": "proy-portal",
+      "nombre": "Sprint 0 — Preparación",
+      "objetivo": "Preparar el entorno, el backlog inicial y los acuerdos de trabajo.",
+      "dias": 14,
+      "estado": "cerrado",
+      "comprometido": 3,
+      "entregado": 3,
+      "inicio": "2026-07-06",
+      "fin": "2026-07-17",
+      "cierre": 1784325600000,
+      "historial": {
+        "2026-07-06": {
+          "restante": 3,
+          "comprometido": 3
+        },
+        "2026-07-07": {
+          "restante": 3,
+          "comprometido": 3
+        },
+        "2026-07-08": {
+          "restante": 3,
+          "comprometido": 3
+        },
+        "2026-07-09": {
+          "restante": 2,
+          "comprometido": 3
+        },
+        "2026-07-10": {
+          "restante": 2,
+          "comprometido": 3
+        },
+        "2026-07-13": {
+          "restante": 1,
+          "comprometido": 3
+        },
+        "2026-07-14": {
+          "restante": 1,
+          "comprometido": 3
+        },
+        "2026-07-15": {
+          "restante": 0,
+          "comprometido": 3
+        },
+        "2026-07-16": {
+          "restante": 0,
+          "comprometido": 3
+        },
+        "2026-07-17": {
+          "restante": 0,
+          "comprometido": 3
+        }
+      },
+      "creado": 1789605283269,
+      "actualizado": 1789605283524
+    },
+    {
+      "id": "sp-1",
+      "proyectoId": "proy-portal",
+      "nombre": "Sprint 1 — Inicio de sesión",
+      "objetivo": "Un cliente puede entrar con su correo.",
+      "dias": 14,
+      "estado": "cerrado",
+      "comprometido": 13,
+      "entregado": 8,
+      "inicio": "2026-07-20",
+      "fin": "2026-07-31",
+      "cierre": 1785535200000,
+      "historial": {
+        "2026-07-20": {
+          "restante": 13,
+          "comprometido": 13
+        },
+        "2026-07-21": {
+          "restante": 13,
+          "comprometido": 13
+        },
+        "2026-07-22": {
+          "restante": 12,
+          "comprometido": 13
+        },
+        "2026-07-23": {
+          "restante": 10,
+          "comprometido": 13
+        },
+        "2026-07-24": {
+          "restante": 10,
+          "comprometido": 13
+        },
+        "2026-07-27": {
+          "restante": 8,
+          "comprometido": 13
+        },
+        "2026-07-28": {
+          "restante": 8,
+          "comprometido": 13
+        },
+        "2026-07-29": {
+          "restante": 6,
+          "comprometido": 13
+        },
+        "2026-07-30": {
+          "restante": 5,
+          "comprometido": 13
+        },
+        "2026-07-31": {
+          "restante": 5,
+          "comprometido": 13
+        }
+      },
+      "creado": 1789605283532,
+      "actualizado": 1789605283561
+    },
+    {
+      "id": "sp-2",
+      "proyectoId": "proy-portal",
+      "nombre": "Sprint 2 — Facturas",
+      "objetivo": "El cliente ve y descarga sus facturas.",
+      "dias": 14,
+      "estado": "cerrado",
+      "comprometido": 16,
+      "entregado": 16,
+      "inicio": "2026-08-03",
+      "fin": "2026-08-14",
+      "cierre": 1786744800000,
+      "historial": {
+        "2026-08-03": {
+          "restante": 16,
+          "comprometido": 16
+        },
+        "2026-08-04": {
+          "restante": 15,
+          "comprometido": 16
+        },
+        "2026-08-05": {
+          "restante": 13,
+          "comprometido": 16
+        },
+        "2026-08-06": {
+          "restante": 12,
+          "comprometido": 16
+        },
+        "2026-08-07": {
+          "restante": 10,
+          "comprometido": 16
+        },
+        "2026-08-10": {
+          "restante": 8,
+          "comprometido": 16
+        },
+        "2026-08-11": {
+          "restante": 6,
+          "comprometido": 16
+        },
+        "2026-08-12": {
+          "restante": 4,
+          "comprometido": 16
+        },
+        "2026-08-13": {
+          "restante": 2,
+          "comprometido": 16
+        },
+        "2026-08-14": {
+          "restante": 0,
+          "comprometido": 16
+        }
+      },
+      "creado": 1789605283568,
+      "actualizado": 1789605283595
+    },
+    {
+      "id": "sp-3",
+      "proyectoId": "proy-portal",
+      "nombre": "Sprint 3 — Certificados",
+      "objetivo": "El cliente descarga certificados firmados.",
+      "dias": 14,
+      "estado": "activo",
+      "comprometido": 15,
+      "entregado": 0,
+      "inicio": "2026-09-07",
+      "fin": "2026-09-18",
+      "cierre": null,
+      "historial": {
+        "2026-09-07": {
+          "restante": 15,
+          "comprometido": 15
+        },
+        "2026-09-08": {
+          "restante": 15,
+          "comprometido": 15
+        },
+        "2026-09-09": {
+          "restante": 13,
+          "comprometido": 15
+        },
+        "2026-09-10": {
+          "restante": 13,
+          "comprometido": 15
+        },
+        "2026-09-11": {
+          "restante": 11,
+          "comprometido": 15
+        },
+        "2026-09-14": {
+          "restante": 11,
+          "comprometido": 15
+        },
+        "2026-09-15": {
+          "restante": 10,
+          "comprometido": 15
+        },
+        "2026-09-16": {
+          "restante": 8,
+          "comprometido": 15
+        }
+      },
+      "creado": 1789605283601,
+      "actualizado": 1789605283648
+    }
+  ],
+  "mediciones": [
+    {
+      "id": "2c48a187-a552-4067-b85a-c62c4c5ebc39",
+      "proyectoId": "proy-sede",
+      "fecha": "2026-05-31",
+      "pv": 40000000,
+      "ev": 38000000,
+      "ac": 41000000,
+      "nota": "Corte mensual",
+      "creado": 1789605283903,
+      "actualizado": null
+    },
+    {
+      "id": "b1157ac2-11e7-4ff5-a36b-2c5979d9b0f0",
+      "proyectoId": "proy-sede",
+      "fecha": "2026-06-30",
+      "pv": 95000000,
+      "ev": 88000000,
+      "ac": 97000000,
+      "nota": "Corte mensual",
+      "creado": 1789605283906,
+      "actualizado": null
+    },
+    {
+      "id": "bf337cfe-9def-4b33-8b4a-6adeb0254085",
+      "proyectoId": "proy-sede",
+      "fecha": "2026-07-31",
+      "pv": 170000000,
+      "ev": 150000000,
+      "ac": 168000000,
+      "nota": "Corte mensual",
+      "creado": 1789605283910,
+      "actualizado": null
+    },
+    {
+      "id": "2e1b9e83-46f8-4417-a3cf-dc1233692bfa",
+      "proyectoId": "proy-portal",
+      "fecha": "2026-08-31",
+      "pv": 60000000,
+      "ev": 55000000,
+      "ac": 58000000,
+      "nota": "Cierre de agosto",
+      "creado": 1789605283654,
+      "actualizado": null
+    },
+    {
+      "id": "753a183e-bb9f-4e9c-bf7e-e23eb167d983",
+      "proyectoId": "proy-sede",
+      "fecha": "2026-08-31",
+      "pv": 250000000,
+      "ev": 215000000,
+      "ac": 246000000,
+      "nota": "Corte mensual",
+      "creado": 1789605283914,
+      "actualizado": null
+    }
+  ],
+  "comentarios": [],
+  "rocas": [
+    {
+      "id": "roca-portal",
+      "trimestre": "Q3-2026",
+      "titulo": "Lanzar el portal de autoservicio a 1.000 clientes piloto",
+      "descripcion": "Primera versión en producción con los tres trámites más pedidos.",
+      "responsableId": "u-laura",
+      "estado": "encamino",
+      "metas": [
+        {
+          "hecho": true,
+          "texto": "MVP con inicio de sesión y consulta de facturas"
+        },
+        {
+          "hecho": false,
+          "texto": "Descarga de certificados"
+        },
+        {
+          "hecho": false,
+          "texto": "1.000 clientes piloto activos"
+        }
+      ],
+      "creado": 1789605283162,
+      "actualizado": null
+    },
+    {
+      "id": "roca-sede",
+      "trimestre": "Q3-2026",
+      "titulo": "Entregar el piso 4 de la sede Bogotá",
+      "descripcion": "Obra civil y mobiliario listos para 60 puestos.",
+      "responsableId": "u-admin",
+      "estado": "riesgo",
+      "metas": [
+        {
+          "hecho": true,
+          "texto": "Obra civil terminada"
+        },
+        {
+          "hecho": false,
+          "texto": "Red y cableado certificados"
+        }
+      ],
+      "creado": 1789605283169,
+      "actualizado": null
+    },
+    {
+      "id": "roca-hecha",
+      "trimestre": "Q3-2026",
+      "titulo": "Cerrar el contrato de mesa de ayuda",
+      "descripcion": "",
+      "responsableId": "u-carlos",
+      "estado": "lograda",
+      "metas": [
+        {
+          "hecho": true,
+          "texto": "Contrato firmado"
+        }
+      ],
+      "creado": 1789605283173,
+      "actualizado": null
+    }
+  ],
+  "metricas": [
+    {
+      "id": "m-tickets",
+      "nombre": "Tickets de soporte abiertos",
+      "meta": "40",
+      "responsableId": "u-carlos",
+      "direccion": "menor",
+      "valores": {
+        "2026-06-22": "67",
+        "2026-06-29": "58",
+        "2026-07-06": "56",
+        "2026-07-13": "61",
+        "2026-07-20": "52",
+        "2026-07-27": "50",
+        "2026-08-03": "55",
+        "2026-08-10": "46",
+        "2026-08-17": "44",
+        "2026-08-24": "49",
+        "2026-08-31": "40",
+        "2026-09-07": "38",
+        "2026-09-14": "43"
+      },
+      "creado": 1789605283179,
+      "actualizado": null
+    },
+    {
+      "id": "m-nps",
+      "nombre": "NPS de clientes",
+      "meta": "45",
+      "responsableId": "u-laura",
+      "direccion": "mayor",
+      "valores": {
+        "2026-06-22": "41",
+        "2026-06-29": "37",
+        "2026-07-06": "38",
+        "2026-07-13": "43",
+        "2026-07-20": "40",
+        "2026-07-27": "41",
+        "2026-08-03": "46",
+        "2026-08-10": "42",
+        "2026-08-17": "43",
+        "2026-08-24": "48",
+        "2026-08-31": "45",
+        "2026-09-07": "45",
+        "2026-09-14": "51"
+      },
+      "creado": 1789605283190,
+      "actualizado": null
+    },
+    {
+      "id": "m-entregas",
+      "nombre": "Entregas a tiempo (%)",
+      "meta": "90",
+      "responsableId": "u-admin",
+      "direccion": "mayor",
+      "valores": {
+        "2026-06-22": "88",
+        "2026-06-29": "83",
+        "2026-07-06": "83",
+        "2026-07-13": "90",
+        "2026-07-20": "84",
+        "2026-07-27": "85",
+        "2026-08-03": "92",
+        "2026-08-10": "86",
+        "2026-08-17": "87",
+        "2026-08-24": "93",
+        "2026-08-31": "88",
+        "2026-09-07": "89",
+        "2026-09-14": "95"
+      },
+      "creado": 1789605283198,
+      "actualizado": null
+    },
+    {
+      "id": "m-gasto",
+      "nombre": "Gasto semanal en obra (M COP)",
+      "meta": "35",
+      "responsableId": "u-admin",
+      "direccion": "menor",
+      "valores": {
+        "2026-06-22": "35",
+        "2026-06-29": "30",
+        "2026-07-06": "30",
+        "2026-07-13": "37",
+        "2026-07-20": "31",
+        "2026-07-27": "32",
+        "2026-08-03": "38",
+        "2026-08-10": "33",
+        "2026-08-17": "33",
+        "2026-08-24": "40",
+        "2026-08-31": "34",
+        "2026-09-07": "35",
+        "2026-09-14": "41"
+      },
+      "creado": 1789605283206,
+      "actualizado": null
+    },
+    {
+      "id": "m-usuarios",
+      "nombre": "Clientes piloto activos",
+      "meta": "1000",
+      "responsableId": "u-laura",
+      "direccion": "mayor",
+      "valores": {
+        "2026-06-22": "20",
+        "2026-06-29": "50",
+        "2026-07-06": "110",
+        "2026-07-13": "200",
+        "2026-07-20": "230",
+        "2026-07-27": "290",
+        "2026-08-03": "380",
+        "2026-08-10": "410",
+        "2026-08-17": "470",
+        "2026-08-24": "560",
+        "2026-08-31": "590",
+        "2026-09-07": "650",
+        "2026-09-14": "740"
+      },
+      "creado": 1789605283214,
+      "actualizado": null
+    }
+  ],
+  "asientos": [
+    {
+      "id": "as-gerente",
+      "nombre": "Gerencia general",
+      "gwt": "Visión, cultura, relaciones clave",
+      "personaId": "u-admin",
+      "padreId": null,
+      "creado": 1789605283223,
+      "actualizado": null
+    },
+    {
+      "id": "as-pmo",
+      "nombre": "Dirección de proyectos (PMO)",
+      "gwt": "Cartera, metodología, informes a gerencia",
+      "personaId": "u-laura",
+      "padreId": "as-gerente",
+      "creado": 1789605283230,
+      "actualizado": null
+    },
+    {
+      "id": "as-ops",
+      "nombre": "Operaciones",
+      "gwt": "Soporte, sedes, proveedores",
+      "personaId": "u-carlos",
+      "padreId": "as-gerente",
+      "creado": 1789605283234,
+      "actualizado": null
+    },
+    {
+      "id": "as-campo",
+      "nombre": "Coordinación de obra",
+      "gwt": "Contratistas, seguridad, avance diario",
+      "personaId": null,
+      "padreId": "as-ops",
+      "creado": 1789605283237,
+      "actualizado": null
+    }
+  ],
+  "vto": {
+    "competencias": "Dirección de proyectos con método\nIntegración de sistemas heredados",
+    "estrategia": "Mercado objetivo: empresas medianas de servicios en Colombia.\nDiferenciales: autoservicio, soporte en el mismo día, precio fijo.",
+    "garantia": "Si un trámite digital falla, lo resolvemos en 24 horas o no se cobra el mes.",
+    "meta1": "2026: portal en producción, NPS 45 y sede Bogotá ampliada.",
+    "meta3": "2029: 120.000 M COP de ingresos y 60 % de trámites digitales.",
+    "proposito": "Que atender a un cliente sea tan fácil como enviarle un mensaje.",
+    "valores": "Cumplimos lo que prometemos\nDecimos las cosas de frente\nAprendemos de cada entrega",
+    "vision10": "En 2036, el 80 % de los trámites de nuestros clientes se resuelven sin llamar."
+  }
+}

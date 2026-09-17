@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gestor PMBOK® 8 — Dirección de proyectos</title>
+<meta name="description" content="Gestor de proyectos basado en la Guía PMBOK 8ª edición: 40 procesos guiados, documentos generados en secuencia, portafolios, equipos y verificación de calidad. Todo local, sin servidor.">
+<link rel="stylesheet" href="assets/css/estilos.css">
+<meta name="theme-color" content="#100826">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3CradialGradient id='o' cx='.34' cy='.3' r='.8'%3E%3Cstop offset='0' stop-color='%23faf5ff'/%3E%3Cstop offset='.2' stop-color='%23e2b6f8'/%3E%3Cstop offset='.48' stop-color='%239327b8'/%3E%3Cstop offset='.78' stop-color='%235816c7'/%3E%3Cstop offset='1' stop-color='%2323144d'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='%23100826'/%3E%3Ccircle cx='32' cy='32' r='24' fill='url(%23o)'/%3E%3Crect x='25' y='25' width='14' height='14' rx='3' fill='%23ffffff' transform='rotate(45 32 32)'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<!-- Degradado del orbe PMBOK para los medidores de avance -->
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="pmbok-orbe" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00b2e3"/>
+      <stop offset=".5" stop-color="#5816c7"/>
+      <stop offset="1" stop-color="#9327b8"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+
+<!-- Fondo animado de todas las vistas: rejilla ShapeGrid (efectos.js la monta una vez) -->
+<div class="fondo-rejilla" aria-hidden="true"><canvas class="shapegrid-canvas"></canvas></div>
+
+<!-- ══════════════ Cabecera ══════════════ -->
+<header class="cabecera">
+  <button class="btn-icono solo-movil" id="btn-menu" aria-label="Abrir navegación" aria-expanded="false">
+    <svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/></svg>
+  </button>
+
+  <a class="marca" href="#/panel">
+    <span class="marca-glifo" aria-hidden="true">◆</span>
+    <span class="marca-texto">
+      <strong>Gestor PMBOK<span class="sup">®</span> 8</strong>
+      <em>Dirección de proyectos</em>
+    </span>
+  </a>
+
+  <button class="buscador-disparador" id="abrir-buscador" aria-label="Buscar proyectos, procesos y acciones">
+    <svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+    <span>Buscar proyecto, proceso o acción…</span>
+    <kbd>Ctrl</kbd><kbd>K</kbd>
+  </button>
+
+  <div class="g-usuario-cabecera" id="usuario-cabecera" hidden></div>
+
+  <nav class="acciones-cabecera" aria-label="Preferencias">
+    <button class="btn-icono" id="btn-tema" title="Cambiar tema claro u oscuro" aria-label="Cambiar tema claro u oscuro">
+      <svg class="ic i-luna" viewBox="0 0 256 256" aria-hidden="true"><path d="M233.54,142.23a8,8,0,0,0-8-2,88.08,88.08,0,0,1-109.8-109.8,8,8,0,0,0-10-10,104.84,104.84,0,0,0-52.91,37A104,104,0,0,0,136,224a103.09,103.09,0,0,0,62.52-20.88,104.84,104.84,0,0,0,37-52.91A8,8,0,0,0,233.54,142.23ZM188.9,190.34A88,88,0,0,1,65.66,67.11a89,89,0,0,1,31.4-26A106,106,0,0,0,96,56,104.11,104.11,0,0,0,200,160a106,106,0,0,0,14.92-1.06A89,89,0,0,1,188.9,190.34Z"/></svg>
+      <svg class="ic i-sol" viewBox="0 0 256 256" aria-hidden="true"><path d="M120,40V16a8,8,0,0,1,16,0V40a8,8,0,0,1-16,0Zm72,88a64,64,0,1,1-64-64A64.07,64.07,0,0,1,192,128Zm-16,0a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128ZM58.34,69.66A8,8,0,0,0,69.66,58.34l-16-16A8,8,0,0,0,42.34,53.66Zm0,116.68-16,16a8,8,0,0,0,11.32,11.32l16-16a8,8,0,0,0-11.32-11.32ZM192,72a8,8,0,0,0,5.66-2.34l16-16a8,8,0,0,0-11.32-11.32l-16,16A8,8,0,0,0,192,72Zm5.66,114.34a8,8,0,0,0-11.32,11.32l16,16a8,8,0,0,0,11.32-11.32ZM48,128a8,8,0,0,0-8-8H16a8,8,0,0,0,0,16H40A8,8,0,0,0,48,128Zm80,80a8,8,0,0,0-8,8v24a8,8,0,0,0,16,0V216A8,8,0,0,0,128,208Zm112-88H216a8,8,0,0,0,0,16h24a8,8,0,0,0,0-16Z"/></svg>
+    </button>
+  </nav>
+</header>
+
+<div class="disposicion">
+
+  <!-- ══════════════ Navegación lateral ══════════════ -->
+  <aside class="lateral" id="lateral">
+    <div class="lateral-interior">
+      <div class="filtro-lateral">
+        <input type="search" id="filtro-arbol" placeholder="Filtrar el menú…" aria-label="Filtrar el menú lateral" autocomplete="off">
+      </div>
+      <nav id="arbol" class="arbol" aria-label="Navegación principal"></nav>
+      <div class="lateral-pie">
+        <span><kbd>Ctrl</kbd><kbd>K</kbd> buscar y actuar</span>
+      </div>
+    </div>
+  </aside>
+  <div class="velo" id="velo" hidden></div>
+
+  <!-- ══════════════ Contenido ══════════════ -->
+  <main class="contenido" id="contenido" tabindex="-1"></main>
+
+</div>
+
+<!-- ══════════════ Paleta de búsqueda ══════════════ -->
+<div class="capa-buscador" id="capa-buscador" hidden>
+  <div class="panel-buscador" role="dialog" aria-modal="true" aria-label="Buscar y actuar">
+    <div class="panel-buscador-campo">
+      <svg class="ic" viewBox="0 0 256 256" aria-hidden="true"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"/></svg>
+      <input type="search" id="entrada-busqueda" placeholder="Proyectos, procesos, herramientas o acciones…" autocomplete="off" spellcheck="false">
+      <kbd>Esc</kbd>
+    </div>
+    <div class="panel-buscador-resultados" id="resultados-busqueda"></div>
+    <div class="panel-buscador-pie">
+      <span><kbd>↑</kbd><kbd>↓</kbd> navegar</span>
+      <span><kbd>↵</kbd> abrir</span>
+      <span id="conteo-busqueda"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ Datos ══════════════ -->
+<script src="assets/js/datos/meta.js"></script>
+<script src="assets/js/datos/principios.js"></script>
+<script src="assets/js/datos/dominios.js"></script>
+<script src="assets/js/datos/procesos.js"></script>
+<script src="assets/js/datos/artefactos.js"></script>
+<script src="assets/js/datos/herramientas.js"></script>
+<script src="assets/js/datos/flujo.js"></script>
+<script src="assets/js/datos/eos.js"></script>
+<script src="assets/js/datos/secciones-proyecto.js"></script>
+
+<!-- ══════════════ Aplicación ══════════════ -->
+<script src="assets/js/almacenamiento.js"></script>
+<script src="assets/js/iconos.js"></script>
+<script src="assets/js/indice.js"></script>
+<script src="assets/js/render.js"></script>
+<script src="assets/js/ui.js"></script>
+<script src="assets/js/shape-grid.js"></script>
+<script src="assets/js/efectos.js"></script>
+<script src="assets/js/dialogos.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/remoto.js"></script>
+<script src="assets/js/gestor.js"></script>
+<script src="assets/js/archivos.js"></script>
+<script src="assets/js/buscador.js"></script>
+<script src="assets/js/calidad.js"></script>
+<script src="assets/js/proyecto.js"></script>
+<script src="assets/js/graficos.js"></script>
+<script src="assets/js/vistas-aprender.js"></script>
+<!-- Pantallas de la calidad del plan: las reúne vistas-proyecto.js -->
+<script src="assets/js/calidad/piezas.js"></script>
+<script src="assets/js/calidad/panel.js"></script>
+<script src="assets/js/calidad/seccion.js"></script>
+<script src="assets/js/calidad/informe.js"></script>
+<script src="assets/js/vistas-proyecto.js"></script>
+<!-- Pantallas de la gestión: las reúne vistas-gestor.js -->
+<script src="assets/js/gestion/acceso.js"></script>
+<script src="assets/js/gestion/panel.js"></script>
+<script src="assets/js/gestion/portafolios.js"></script>
+<script src="assets/js/gestion/agenda.js"></script>
+<script src="assets/js/gestion/eos.js"></script>
+<script src="assets/js/gestion/admin.js"></script>
+<script src="assets/js/gestion/aprender.js"></script>
+<script src="assets/js/vistas-gestor.js"></script>
+<!-- Pestañas del espacio de trabajo: las usa vistas-obra.js -->
+<script src="assets/js/obra/flujo.js"></script>
+<script src="assets/js/obra/documentos.js"></script>
+<script src="assets/js/obra/trabajo.js"></script>
+<script src="assets/js/obra/dominios.js"></script>
+<script src="assets/js/obra/control.js"></script>
+<script src="assets/js/obra/equipo.js"></script>
+<script src="assets/js/vistas-obra.js"></script>
+<script src="assets/js/obra-acciones.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
