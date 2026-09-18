@@ -24,6 +24,8 @@ npm run dev                 :: igual, con node --watch
 npm test                    :: pruebas de aceptación de la API (node:test), base pmbok8_test, en serie
 npm run test:e2e            :: Playwright con el Edge instalado (channel msedge), API propia en :3100, base pmbok8_e2e
 npm run humo -- <URL>        :: prueba de humo contra un servidor en marcha (registro, equipo, datos guardados); --limpiar al final
+npm run estres:servidor      :: servidor de carga aparte: base pmbok8_estres en :3200
+npm run estres               :: prueba de carga (50 usuarios); --usuarios= --iteraciones= --equipos= o una URL
 npm run db:migrar           :: aplica las migraciones pendientes
 npm run db:reiniciar        :: BORRA pmbok8 y la crea de cero
 ```
@@ -66,6 +68,7 @@ Todo el contenido de la guía (procesos con su ITTO, bandas del flujo, plantilla
 - `src/servicios/estado.js` construye la fotografía por usuario que carga la interfaz. Su forma tiene que ser idéntica a la base del navegador, porque de ello dependen la exportación e importación (`servicios/datos.js`, formato `pmbok8-gestor`) y «Llevar al servidor».
 - Migraciones: `db/migraciones/NNN_nombre.sql`. Cada una se aplica una sola vez, en orden alfabético, dentro de una transacción, y queda anotada en `schema_migraciones`. Muchas reglas las garantiza la propia base (CHECK, un solo sprint activo por proyecto, clave foránea compuesta tarea→sprint del mismo proyecto, cascadas, disparadores que limpian permisos).
 - Los errores son JSON `{ error, codigo, detalles }` (`src/errores.js`). Las fechas-hora van en milisegundos y las fechas en `AAAA-MM-DD`.
+- **Concurrencia** (medido con `npm run estres`, ver «Bajo carga» en `backend/README.md`): las contraseñas se cifran en hilos aparte (`servicios/clave.js`) porque `bcryptjs` no cede el turno y dejaba la API parada casi tres segundos mientras una clase entera entraba. Todo lo que toque un sprint bloquea **primero** la fila de `sprints` y después la de `sprint_burndown`, y con `FOR NO KEY UPDATE`, que no choca con el candado de la clave foránea de `tareas`: invertir ese orden reproduce un interbloqueo. `db.transaccion` repite hasta tres veces lo que PostgreSQL deshaga por un choque (`40P01`, `40001`) y lo anota en el registro.
 
 Añadir una colección persistente nueva suele tocar: una migración, `definiciones.js`, una ruta (a menudo con una fábrica de `recursos.js`), `servicios/estado.js`, la exportación e importación en `servicios/datos.js`, `COLECCIONES` y las llamadas remotas en `assets/js/gestor.js`, y una prueba de aceptación.
 

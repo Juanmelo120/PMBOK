@@ -68,6 +68,15 @@ function traducirPg(err) {
     case '22007':
     case '22008':
       return peticionInvalida('Algún valor tiene un formato no válido.');
+    /* Dos personas tocaron los mismos datos a la vez y la base deshizo una.
+       db.transaccion ya lo reintenta: si llega hasta aquí, es que ni con
+       esas, y lo honrado es pedir que se repita en vez de dar un 500. */
+    case '40P01':
+    case '40001':
+      return new ErrorHttp(409, 'Otra persona estaba cambiando lo mismo en ese momento. Vuelve a intentarlo.', 'CONCURRENCIA');
+    /* La consulta pasó del tiempo máximo (statement_timeout) */
+    case '57014':
+      return new ErrorHttp(503, 'La operación tardó demasiado y se canceló. Inténtalo de nuevo en un momento.', 'DEMASIADO_LENTO');
     default:
       return null;
   }
@@ -92,6 +101,10 @@ function manejador(err, req, res, _next) {
   else if (err && err.type === 'entity.too.large') e = new ErrorHttp(413, 'La petición es demasiado grande.', 'DEMASIADO_GRANDE');
   else if (err && err.code === 'LIMIT_FILE_SIZE') e = new ErrorHttp(413, 'El archivo supera el tamaño máximo permitido.', 'DEMASIADO_GRANDE');
   else if (err && err.code && /^LIMIT_/.test(err.code)) e = peticionInvalida('La subida del archivo no es válida: ' + err.message);
+  /* El pozo de conexiones estaba lleno y no se liberó ninguna a tiempo */
+  else if (err && /timeout exceeded when trying to connect/i.test(err.message || '')) {
+    e = new ErrorHttp(503, 'El servidor está atendiendo demasiadas peticiones a la vez. Inténtalo de nuevo en unos segundos.', 'SATURADO');
+  }
   else if (err && typeof err.code === 'string' && /^\d{2}[0-9A-Z]{3}$/.test(err.code)) e = traducirPg(err) || err;
 
   if (e instanceof ErrorHttp) {

@@ -75,7 +75,18 @@ const bd = {
   password: partes.password || process.env.PGPASSWORD || '',
   database: nombreBd,
   ssl: ssl,
-  max: entero(process.env.PGPOOL_MAX, 10),
+  /* Cuántas consultas se atienden a la vez. Con 50 personas trabajando,
+     este número es el que marca el ritmo: por debajo de ~16 las lecturas
+     grandes (/api/estado) se pasan la vida haciendo cola. Subirlo sin
+     medida tampoco ayuda: PostgreSQL rinde menos con muchas conexiones. */
+  max: entero(process.env.PGPOOL_MAX, 16),
+  /* Una conexión ociosa se devuelve al sistema en medio minuto */
+  idleTimeoutMillis: entero(process.env.PGPOOL_OCIO_MS, 30000),
+  /* Si el pozo está lleno y no se libera nada, más vale decirlo que
+     dejar la petición colgada para siempre (que es el valor de fábrica) */
+  connectionTimeoutMillis: entero(process.env.PGPOOL_ESPERA_MS, 15000),
+  /* Ninguna consulta debe retener una conexión indefinidamente */
+  statement_timeout: entero(process.env.PG_CONSULTA_MS, 30000),
   application_name: 'pmbok8-backend'
 };
 
@@ -87,6 +98,9 @@ const bdAdmin = {
   user: process.env.PGADMIN_USER || bd.user,
   password: process.env.PGADMIN_USER ? (process.env.PGADMIN_PASSWORD || '') : bd.password,
   max: 2,
+  /* Una migración puede tardar lo que haga falta: cortarla por la mitad
+     dejaría el esquema a medias */
+  statement_timeout: undefined,
   application_name: 'pmbok8-migraciones'
 };
 

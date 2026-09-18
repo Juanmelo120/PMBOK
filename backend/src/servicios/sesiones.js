@@ -1,7 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
    sesiones.js — Acceso, tokens y contraseñas
    ───────────────────────────────────────────────────────────
-   · Contraseñas con bcrypt (coste 10).
+   · Contraseñas con bcrypt (coste 10), cifradas en hilos aparte
+     para que un acceso masivo no detenga la API (clave.js).
    · El token JWT solo lleva el usuario y el id de sesión; la sesión
      vive en la tabla «sesiones», así que salir, desactivar la cuenta
      o cambiar la contraseña invalida los tokens al instante.
@@ -15,13 +16,32 @@ const jwt = require('jsonwebtoken');
 const config = require('../config');
 const db = require('../db');
 const repo = require('../repositorio');
+const clave_ = require('./clave');
 const D = require('../definiciones');
 const { ErrorHttp, noAutenticado } = require('../errores');
 
-const COSTE = 10;
+const COSTE = clave_.COSTE;
 /* Hash de relleno: comparar contra él cuando el correo no existe
    iguala el tiempo de respuesta y no delata qué cuentas hay */
 const HASH_RELLENO = bcrypt.hashSync('relleno-sin-uso', COSTE);
+
+/* Los contadores de intentos no pueden crecer sin fin: cada IP y cada
+   correo probado deja una entrada, y solo se borraba al volver a
+   aparecer. Se barren las caducadas de vez en cuando. */
+const LIMITE_ENTRADAS = 20000;
+
+function barrer(mapa, vidaMs) {
+  const ahora = Date.now();
+  for (const [k, r] of mapa) {
+    if (ahora - r.desde > vidaMs) mapa.delete(k);
+  }
+  /* Si aun así no cabe, manda la seguridad: se conservan las más recientes */
+  if (mapa.size > LIMITE_ENTRADAS) {
+    [...mapa.entries()].sort((a, b) => a[1].desde - b[1].desde)
+      .slice(0, mapa.size - LIMITE_ENTRADAS)
+      .forEach(([k]) => mapa.delete(k));
+  }
+}
 
 const intentos = new Map();
 
@@ -47,7 +67,7 @@ function anotarFallo(clave) {
 }
 
 function hashear(texto) {
-  return bcrypt.hash(texto, COSTE);
+  return clave_.hashear(texto, COSTE);
 }
 
 async function entrar(correo, clave, { ip, agente } = {}) {
@@ -56,7 +76,7 @@ async function entrar(correo, clave, { ip, agente } = {}) {
   comprobarLimite(k);
 
   const fila = await db.uno('SELECT * FROM usuarios WHERE correo = $1', [correoNorm]);
-  const coincide = await bcrypt.compare(String(clave || ''), fila ? fila.clave_hash : HASH_RELLENO);
+  const coincide = await clave_.comparar(String(clave || ''), fila ? fila.clave_hash : HASH_RELLENO);
 
   if (!fila || !coincide) {
     anotarFallo(k);
@@ -146,15 +166,18 @@ function revocarDe(usuarioId, excepto, cx) {
 
 async function cambiarPropiaClave(usuarioId, sesionId, actual, nueva) {
   const fila = await db.uno('SELECT clave_hash FROM usuarios WHERE id = $1', [usuarioId]);
-  if (!fila || !(await bcrypt.compare(String(actual || ''), fila.clave_hash))) {
+  if (!fila || !(await clave_.comparar(String(actual || ''), fila.clave_hash))) {
     throw new ErrorHttp(400, 'La contraseña actual no coincide.', 'CLAVE_INCORRECTA');
   }
   if (String(actual) === String(nueva)) {
     throw new ErrorHttp(400, 'La nueva contraseña debe ser distinta de la actual.', 'CLAVE_REPETIDA');
   }
+  /* Cifrar antes de abrir la transacción: si no, la conexión se queda
+     retenida durante todo el cifrado y bajo carga eso vacía el pozo. */
+  const hash = await hashear(nueva);
   await db.transaccion(async (cx) => {
     await db.consulta('UPDATE usuarios SET clave_hash = $1, debe_cambiar_clave = false WHERE id = $2',
-      [await hashear(nueva), usuarioId], cx);
+      [hash, usuarioId], cx);
     await revocarDe(usuarioId, sesionId, cx);
   });
 }
@@ -165,6 +188,14 @@ async function purgar(cx) {
     "DELETE FROM sesiones WHERE expira < now() OR revocada < now() - interval '1 day'", [], cx);
   return r.rowCount;
 }
+
+/* Cada diez minutos se tiran las anotaciones ya caducadas de los dos
+   mapas; sin esto, un servidor de meses acumula una entrada por cada
+   IP y correo que alguien haya probado. */
+setInterval(() => {
+  barrer(intentos, config.acceso.ventanaMinutos * 60 * 1000);
+  barrer(altas, 3600 * 1000);
+}, 10 * 60 * 1000).unref();
 
 function reiniciarLimites() {
   intentos.clear();

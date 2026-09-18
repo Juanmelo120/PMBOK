@@ -326,7 +326,64 @@ propia API en el puerto 3100 con la base `pmbok8_e2e` y maneja la aplicación co
 | E2E-03 Modo local | Abierta con doble clic funciona sin ninguna llamada a la API y guarda en `localStorage` |
 | E2E-04 Registro y equipo (2 pruebas) | Compañeros y líder crean su cuenta; la líder crea el proyecto y los añade por correo; una compañera vuelve a entrar, guarda el acta y tras recargar la líder la lee; el observador solo ve; un cuarto entra con código. Lo mismo en modo local, sin API |
 
-Última ejecución: **12 de 12 superadas** en algo más de 1 minuto.
+Última ejecución: **14 de 14 superadas** en algo más de 1 minuto.
+
+---
+
+## Bajo carga
+
+`npm run estres` simula un aula entera trabajando a la vez. Necesita su propio servidor, que se
+levanta aparte y usa la base `pmbok8_estres` en el puerto 3200, así que **no toca `pmbok8` ni el
+servidor de trabajo**:
+
+```bat
+npm run estres:servidor          :: en una consola: recrea pmbok8_estres y escucha en :3200
+npm run estres                   :: en otra: 50 usuarios · 20 iteraciones · 5 equipos
+npm run estres -- --usuarios=100 --iteraciones=25 --equipos=6
+npm run estres -- https://pmbok-production.up.railway.app --usuarios=30
+```
+
+El guion recorre cinco fases con las mismas rutas que usa la interfaz: registro simultáneo,
+entrada simultánea, montaje de equipos por código de invitación, sesiones de trabajo en paralelo
+(dos lecturas por cada escritura) y una **tormenta** en la que todo un equipo crea tareas del
+mismo sprint mientras su líder abre otro y fotografía el burndown. Durante las fases críticas una
+sonda pide `/api/salud` cada 50 ms: es la consulta más barata que hay, así que lo que tarde de
+más mide lo que el servidor tiene atascado.
+
+Al terminar informa de los tiempos por ruta (p50, p95, p99 y máximo), del reparto de códigos de
+estado y del cuerpo de cada error. Devuelve código de salida 1 si alguna petición falló.
+
+### Lo que encontró y se corrigió
+
+| Síntoma | Causa | Corrección |
+|---|---|---|
+| 500 `ERROR_INTERNO` al crear tareas y sprints a la vez, siempre a ~1 s (el `deadlock_timeout` de PostgreSQL) | Interbloqueo: crear una tarea bloqueaba `sprint_burndown` y después `sprints`; cerrar un sprint lo hacía al revés | `registrarBurndown` toma siempre primero la fila de `sprints`, y con `FOR NO KEY UPDATE`, que no choca con el candado que la clave foránea de `tareas` pone sobre el sprint (`servicios/trabajo.js`) |
+| `/api/salud` pasaba de 16 ms a **2790 ms** mientras la clase entraba; la API no atendía nada más | `bcryptjs` es JavaScript puro y su API «asíncrona» **no cede el turno**: 50 contraseñas dejan el hilo de Node parado 2,8 s con el resto de núcleos ociosos | Las contraseñas se cifran en unos pocos hilos aparte (`servicios/clave.js`), con el mismo formato de hash: las cuentas ya creadas siguen valiendo |
+| `/api/estado` era la lectura más lenta con diferencia | Pedía una conexión distinta al pozo para cada una de sus ~20 consultas, así que con mucha gente dentro hacía cola veinte veces | La fotografía entera se hace con una sola conexión, dentro de `BEGIN READ ONLY` (`servicios/estado.js`) |
+| Un servidor de meses acumulaba memoria | Los mapas de intentos de acceso y de altas solo borraban una entrada al volver a verla | Barrido de las caducadas cada diez minutos, con tope de entradas (`servicios/sesiones.js`) |
+| Una petición se quedaba colgada para siempre si el pozo se llenaba | El valor de fábrica de `connectionTimeoutMillis` es esperar sin límite | `PGPOOL_MAX` 16, espera máxima de 15 s y `statement_timeout` de 30 s; al agotarse responde 503 `SATURADO` en vez de colgarse (`config.js`, `errores.js`) |
+
+Además, `db.transaccion` repite hasta tres veces la transacción que PostgreSQL deshaga por un
+choque con otra (`40P01` interbloqueo, `40001` serialización), con una espera corta y desigual, y
+deja constancia en el registro. Es una red de seguridad, no la corrección: el orden de bloqueo
+ya evita el choque. Si ni con eso sale, el cliente recibe un 409 `CONCURRENCIA` con un mensaje
+legible en vez de un 500.
+
+### Cifras
+
+Medido en este equipo (12 núcleos, PostgreSQL 17.11 en la misma máquina), antes y después:
+
+| | 50 usuarios · antes | 50 usuarios · después | 100 usuarios · después |
+|---|---|---|---|
+| Peticiones con error | 3 (interbloqueo) | **0** | **0** |
+| `/api/salud` durante el acceso | 2790 ms | **11 ms** | **16 ms** |
+| `POST /auth/entrar` (p50) | 2835 ms | 458 ms | 816 ms |
+| `GET /api/estado` (p50) | 277 ms | 114 ms | 152 ms |
+| Rendimiento | 262 pet/s | **526 pet/s** | **576 pet/s** |
+
+El acceso sigue siendo lo más caro de todo, y así debe ser: bcrypt con coste 10 tarda a propósito
+unos 60 ms por contraseña. Lo que cambió es que ahora ese tiempo no lo paga el resto de la
+aplicación. `CLAVE_HILOS` decide cuántos hilos se reparten ese trabajo.
 
 ---
 

@@ -19,7 +19,9 @@
     "bd:detener": "scripts\\postgres.cmd detener",
     "bd:estado": "scripts\\postgres.cmd estado",
     "test:e2e": "playwright test",
-    "humo": "node scripts/humo.js"
+    "humo": "node scripts/humo.js",
+    "estres:servidor": "node tests/estres/servidor-estres.js",
+    "estres": "node scripts/estres.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

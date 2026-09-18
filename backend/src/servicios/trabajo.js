@@ -15,9 +15,19 @@ async function sprintActivo(proyectoId, cx) {
 }
 
 /* Fotografía de hoy de los puntos pendientes del sprint activo.
-   Es lo que permite dibujar un burndown real. */
+   Es lo que permite dibujar un burndown real.
+
+   ORDEN DE BLOQUEO — no cambiar sin pensarlo: primero la fila de
+   «sprints» y después la de «sprint_burndown». Todo lo que toca un
+   sprint (crear una tarea, cerrarlo, abrir otro) pasa por aquí, así que
+   basta con que este orden sea siempre el mismo para que dos
+   transacciones simultáneas no se queden esperando la una a la otra.
+   El candado es FOR NO KEY UPDATE, no FOR UPDATE: el más fuerte choca
+   con el que la clave foránea de «tareas» toma sobre el sprint, y dos
+   personas creando tareas a la vez volverían a bloquearse. */
 async function registrarBurndown(sprintId, cx) {
-  const s = await db.uno("SELECT id FROM sprints WHERE id = $1 AND estado = 'activo'", [sprintId], cx);
+  const s = await db.uno(
+    "SELECT id FROM sprints WHERE id = $1 AND estado = 'activo' FOR NO KEY UPDATE", [sprintId], cx);
   if (!s) return null;
   const t = await db.uno(
     `SELECT COALESCE(sum(puntos), 0) AS comprometido,
@@ -56,7 +66,8 @@ async function crearSprint(proyectoId, datos) {
 }
 
 async function cerrarSprintEn(sprintId, cx) {
-  const s = await db.uno('SELECT id, estado FROM sprints WHERE id = $1 FOR UPDATE', [sprintId], cx);
+  /* Mismo candado que en registrarBurndown, y por el mismo motivo */
+  const s = await db.uno('SELECT id, estado FROM sprints WHERE id = $1 FOR NO KEY UPDATE', [sprintId], cx);
   if (!s) throw noEncontrado('No existe el sprint.');
   if (s.estado !== 'activo') throw conflicto('Solo se puede cerrar un sprint activo.');
 
