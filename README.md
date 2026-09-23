@@ -153,6 +153,10 @@ ejemplo práctico, errores frecuentes y notas del equipo.
 - **Administración**: cuentas (las registradas por sus dueños se marcan «se registró solo»), roles (administrador, director, miembro, ejecutor) y **permisos por
   portafolio, programa o proyecto** con tres niveles (ver, editar, dirigir). Los permisos se suman
   y gana el más alto. Exportación e importación de toda la base.
+- **Notas de los proyectos** (solo administradores): cada proyecto calificado de **1.0 a 5.0** según
+  el avance de su flujo —`nota = 1.0 + (avance ÷ 100) × 4.0`, se aprueba desde 3.0—, con el promedio
+  del curso y el borrado de los proyectos de prueba (pide escribir `ELIMINAR`). Los procesos omitidos
+  no cuentan en contra: salen del denominador.
 - **Supervisión de rocas** (solo administradores): el avance de cada roca con el desglose que lo
   justifica, sus integrantes con el papel de cada uno y lo que lleva hecho, y al abrir una roca la
   bitácora completa de sus proyectos —tareas, documentos, archivos, sprints, procesos, riesgos,
@@ -317,7 +321,7 @@ assets/
     graficos.js                Gráficos SVG de líneas y barras, accesibles
     vistas-aprender.js         Fichas de consulta: procesos, dominios, principios
     vistas-proyecto.js         Pantallas de calidad del plan
-    vistas-gestor.js           Panel, portafolios, agenda, EOS, administración y supervisión de rocas
+    vistas-gestor.js           Panel, portafolios, agenda, EOS, administración, supervisión de rocas y notas
     vistas-obra.js             Espacio de trabajo del proyecto
     obra-acciones.js           Interacción del espacio de trabajo
     app.js                     Enrutador, navegación e identidad

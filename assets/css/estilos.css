@@ -2987,3 +2987,26 @@ ol.sv-bitacora { list-style: none; margin: 0 !important; padding: 0 !important; 
   .sv-anillo b { font-size: 30px; }
   .sv-caras-texto { display: none; }
 }
+
+
+/* ══════════════ Notas de los proyectos (solo admin) ══════════════ */
+
+.nt-escala { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin-bottom: 24px; }
+.nt-tramo {
+  border: 1px solid var(--linea); border-radius: var(--radio-l); padding: 12px 14px;
+  background: var(--papel); box-shadow: var(--sombra-1), var(--brillo);
+  display: flex; flex-direction: column; gap: 2px;
+}
+.nt-tramo.aprueba { border-color: var(--acento-borde); }
+.nt-tramo b { font-size: 21px; font-weight: 700; letter-spacing: -.03em; font-variant-numeric: tabular-nums; }
+.nt-tramo span { font-size: 11.5px; color: var(--tinta-3); }
+
+.nt-tabla td { vertical-align: middle; }
+.nt-sub { display: block; font-size: 11.5px; color: var(--tinta-3); margin-top: 2px; }
+.nt-avance { min-width: 150px; }
+.nt-avance .pa-barra { margin-top: 0; }
+.nt-avance span { display: block; font-size: 11.5px; color: var(--tinta-3); margin-top: 4px; font-variant-numeric: tabular-nums; }
+.nt-nota { font-size: 19px; font-weight: 700; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+/* Hereda el enlace subrayado de .pa-mini, en rojo por ser destructivo */
+.nt-borrar { color: var(--rojo); text-decoration-color: color-mix(in srgb, var(--rojo) 40%, transparent); }
+.nt-borrar:hover { text-decoration-color: var(--rojo); }

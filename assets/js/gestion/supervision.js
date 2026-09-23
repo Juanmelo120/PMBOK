@@ -223,7 +223,9 @@ window.GestionSupervision = (function () {
       { id: 'cuentas', ruta: '#/admin', icono: 'admin', nombre: 'Cuentas y datos',
         lema: 'Usuarios, permisos, copia de seguridad' },
       { id: 'rocas', ruta: '#/admin/rocas', icono: 'rocas', nombre: 'Supervisión de rocas',
-        lema: 'Avance, integrantes y qué hizo cada uno' }
+        lema: 'Avance, integrantes y qué hizo cada uno' },
+      { id: 'notas', ruta: '#/admin/notas', icono: 'indicador', nombre: 'Notas de los proyectos',
+        lema: 'Calificación de 1.0 a 5.0 por avance del flujo' }
     ];
     return '<div class="g-pestanas-eos">' + items.map(function (s) {
       return '<a class="g-pestana' + (s.id === activa ? ' activa' : '') + '" href="' + s.ruta + '">' +

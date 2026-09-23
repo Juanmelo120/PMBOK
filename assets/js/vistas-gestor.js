@@ -4,8 +4,8 @@
    Conecta los botones «data-g» de la gestión con su acción y
    reúne bajo un solo nombre las pantallas, que viven en
    gestion/: GestionAcceso, GestionPanel, GestionPortafolios,
-   GestionAgenda, GestionEos, GestionAdmin, GestionSupervision y
-   GestionAprender.
+   GestionAgenda, GestionEos, GestionAdmin, GestionSupervision,
+   GestionNotas y GestionAprender.
    ═══════════════════════════════════════════════════════════ */
 
 window.VistasGestor = (function () {
@@ -271,6 +271,7 @@ window.VistasGestor = (function () {
     'cerrar-nuevo-portafolio': function () { alternar('g-nuevo-portafolio', false); },
     'crear-portafolio': crearPortafolio,
     'borrar-portafolio': borrarPortafolio,
+    'borrar-proyecto': borrarProyecto,
     'nuevo-programa': nuevoPrograma,
 
     /* EOS · rocas */
@@ -386,6 +387,28 @@ window.VistasGestor = (function () {
     }, function () {
       Gestor.borrarPortafolio(id);
       Dialogo.avisar('Portafolio eliminado');
+      recargar();
+    });
+  }
+
+  /* Borrar arrastra documentos, archivos, riesgos, tareas y mediciones: se
+     exige escribir ELIMINAR, igual que desde la pestaña Equipo del proyecto. */
+  function borrarProyecto(el, id) {
+    var pr = Gestor.proyecto(id);
+    if (!pr) return;
+    Dialogo.pedir({
+      titulo: 'Eliminar «' + pr.nombre + '»',
+      texto: 'Se eliminan sus documentos, archivos, riesgos, tareas y mediciones. No se puede deshacer. ' +
+        'Escribe <b>ELIMINAR</b> para confirmar.',
+      campos: [{ id: 'confirma', etiqueta: 'Confirmación', placeholder: 'ELIMINAR' }],
+      confirmar: 'Eliminar proyecto'
+    }, function (v) {
+      if (String(v.confirma).trim().toUpperCase() !== 'ELIMINAR') {
+        Dialogo.avisar('No se eliminó: la confirmación no coincide', 'aviso');
+        return;
+      }
+      Gestor.borrarProyecto(id);
+      Dialogo.avisar('Proyecto eliminado');
       recargar();
     });
   }
@@ -614,7 +637,9 @@ window.VistasGestor = (function () {
   /* La administración tiene dos pantallas bajo la misma ruta y el mismo
      candado: las cuentas y la supervisión de rocas. */
   function admin(seccion, id) {
-    return seccion === 'rocas' ? GestionSupervision.supervision(id) : GestionAdmin.admin();
+    if (seccion === 'rocas') return GestionSupervision.supervision(id);
+    if (seccion === 'notas') return GestionNotas.notas();
+    return GestionAdmin.admin();
   }
 
   /* El enrutador pide las pantallas por aquí; cada una la pinta su módulo */

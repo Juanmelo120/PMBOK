@@ -47,7 +47,7 @@ PostgreSQL tiene que estar en marcha para las dos baterías. Las pruebas nunca t
 - Nada de módulos ES ni empaquetador: el modo local abre `index.html` con `file://`, donde los módulos ES fallan por CORS. Por eso el patrón es IIFE + global.
 - Las pantallas grandes se reparten en subcarpetas, y el archivo que conserva el nombre del global compone las piezas y ofrece el contrato que usa `app.js`:
   - `obra/` → las pestañas de un proyecto (`ObraFlujo`, `ObraDocumentos`, `ObraTrabajo`, `ObraDominios`, `ObraControl`, `ObraEquipo`); las reúne `vistas-obra.js`.
-  - `gestion/` → las pantallas de gestión (`GestionAcceso`, `GestionPanel`, `GestionPortafolios`, `GestionAgenda`, `GestionEos`, `GestionAdmin`, `GestionSupervision`, `GestionAprender`); las reúne `vistas-gestor.js`, que además conecta los botones `data-g`.
+  - `gestion/` → las pantallas de gestión (`GestionAcceso`, `GestionPanel`, `GestionPortafolios`, `GestionAgenda`, `GestionEos`, `GestionAdmin`, `GestionSupervision`, `GestionNotas`, `GestionAprender`); las reúne `vistas-gestor.js`, que además conecta los botones `data-g`.
   - `calidad/` → la calidad del plan (`CalidadPiezas`, `CalidadPanel`, `CalidadSeccion`, `CalidadInforme`); las reúne `vistas-proyecto.js`, que conecta los botones `data-pa`.
   Cada subcarpeta se carga **antes** del archivo que la compone.
 - La interacción se declara en tablas: `var ACCIONES = { 'crear-riesgo': crearRiesgo, … }` asocia el atributo `data-o` / `data-g` / `data-pa` de cada botón con una función con nombre. Para añadir un botón: su entrada en la tabla y su función, nada de alargar un `switch`.

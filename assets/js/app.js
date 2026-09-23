@@ -128,6 +128,9 @@
       eos: 'EOS Gerencia', admin: 'Administración', aprender: 'Aprender',
       herramientas: 'Herramientas', artefactos: 'Artefactos', procesos: 'Los 40 procesos'
     };
+    if (ruta.nombre === 'admin' && ruta.resto[0] === 'notas') {
+      return 'Notas de los proyectos — ' + base;
+    }
     if (ruta.nombre === 'admin' && ruta.resto[0] === 'rocas') {
       var roca = ruta.resto[1] ? Gestor.uno('rocas', ruta.resto[1]) : null;
       return (roca ? roca.titulo : 'Supervisión de rocas') + ' — ' + base;
@@ -184,6 +187,7 @@
     if (Gestor.esAdmin()) {
       items.push(['#/admin', 'Administración', 'admin']);
       items.push(['#/admin/rocas', 'Supervisión de rocas', 'rocas']);
+      items.push(['#/admin/notas', 'Notas de los proyectos', 'indicador']);
     }
     return '<div class="arbol-grupo"><div class="arbol-titulo">Gestión</div>' +
       items.map(function (i) { return enlace(i[0], '', i[1], i[2]); }).join('') + '</div>';
