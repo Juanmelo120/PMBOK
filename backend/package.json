@@ -24,6 +24,7 @@
     "estres": "node scripts/estres.js"
   },
   "dependencies": {
+    "@scalar/express-api-reference": "^0.8.48",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",

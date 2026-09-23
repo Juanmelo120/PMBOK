@@ -22,7 +22,7 @@
     portafolios:  { vista: function () { return VistasGestor.portafolios(); } },
     agenda:       { vista: function (p) { return VistasGestor.agenda(p[0]); } },
     eos:          { vista: function (p) { return VistasGestor.eos(p[0]); } },
-    admin:        { vista: function () { return VistasGestor.admin(); } },
+    admin:        { vista: function (p) { return VistasGestor.admin(p[0], p[1]); } },
     aprender:     { vista: function () { return VistasGestor.aprender(); } },
     herramientas: { vista: function () { return VistasGestor.herramientas(); } },
     artefactos:   { vista: function () { return VistasGestor.artefactos(); } },
@@ -128,6 +128,10 @@
       eos: 'EOS Gerencia', admin: 'Administración', aprender: 'Aprender',
       herramientas: 'Herramientas', artefactos: 'Artefactos', procesos: 'Los 40 procesos'
     };
+    if (ruta.nombre === 'admin' && ruta.resto[0] === 'rocas') {
+      var roca = ruta.resto[1] ? Gestor.uno('rocas', ruta.resto[1]) : null;
+      return (roca ? roca.titulo : 'Supervisión de rocas') + ' — ' + base;
+    }
     if (ruta.nombre === 'proyectos') {
       var pr = Gestor.proyecto(ruta.resto[0]);
       if (pr) return pr.nombre + ' — ' + base;
@@ -177,7 +181,10 @@
       ['#/agenda', 'Agenda', 'agenda'],
       ['#/eos', 'EOS Gerencia', 'eos']
     ];
-    if (Gestor.esAdmin()) items.push(['#/admin', 'Administración', 'admin']);
+    if (Gestor.esAdmin()) {
+      items.push(['#/admin', 'Administración', 'admin']);
+      items.push(['#/admin/rocas', 'Supervisión de rocas', 'rocas']);
+    }
     return '<div class="arbol-grupo"><div class="arbol-titulo">Gestión</div>' +
       items.map(function (i) { return enlace(i[0], '', i[1], i[2]); }).join('') + '</div>';
   }

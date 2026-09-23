@@ -153,6 +153,10 @@ ejemplo práctico, errores frecuentes y notas del equipo.
 - **Administración**: cuentas (las registradas por sus dueños se marcan «se registró solo»), roles (administrador, director, miembro, ejecutor) y **permisos por
   portafolio, programa o proyecto** con tres niveles (ver, editar, dirigir). Los permisos se suman
   y gana el más alto. Exportación e importación de toda la base.
+- **Supervisión de rocas** (solo administradores): el avance de cada roca con el desglose que lo
+  justifica, sus integrantes con el papel de cada uno y lo que lleva hecho, y al abrir una roca la
+  bitácora completa de sus proyectos —tareas, documentos, archivos, sprints, procesos, riesgos,
+  cambios, lecciones y comentarios— de lo más reciente a lo más antiguo.
 
 ### EOS — gerencia general
 
@@ -313,7 +317,7 @@ assets/
     graficos.js                Gráficos SVG de líneas y barras, accesibles
     vistas-aprender.js         Fichas de consulta: procesos, dominios, principios
     vistas-proyecto.js         Pantallas de calidad del plan
-    vistas-gestor.js           Panel, portafolios, agenda, EOS y administración
+    vistas-gestor.js           Panel, portafolios, agenda, EOS, administración y supervisión de rocas
     vistas-obra.js             Espacio de trabajo del proyecto
     obra-acciones.js           Interacción del espacio de trabajo
     app.js                     Enrutador, navegación e identidad

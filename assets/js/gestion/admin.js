@@ -49,6 +49,7 @@ window.GestionAdmin = (function () {
       '</div>' +
       '<p class="bajada">Crea cuentas y concede permisos por portafolio, programa o proyecto. ' +
       'Los permisos se suman: siempre gana el nivel más alto.</p>' +
+      GestionSupervision.pestanas('cuentas') +
 
       '<div id="g-nuevo-usuario" hidden><div class="pa-panel">' +
         '<div id="g-error-usuario"></div>' +

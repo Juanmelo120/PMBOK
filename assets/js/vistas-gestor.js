@@ -4,7 +4,8 @@
    Conecta los botones «data-g» de la gestión con su acción y
    reúne bajo un solo nombre las pantallas, que viven en
    gestion/: GestionAcceso, GestionPanel, GestionPortafolios,
-   GestionAgenda, GestionEos, GestionAdmin y GestionAprender.
+   GestionAgenda, GestionEos, GestionAdmin, GestionSupervision y
+   GestionAprender.
    ═══════════════════════════════════════════════════════════ */
 
 window.VistasGestor = (function () {
@@ -610,6 +611,12 @@ window.VistasGestor = (function () {
     });
   }
 
+  /* La administración tiene dos pantallas bajo la misma ruta y el mismo
+     candado: las cuentas y la supervisión de rocas. */
+  function admin(seccion, id) {
+    return seccion === 'rocas' ? GestionSupervision.supervision(id) : GestionAdmin.admin();
+  }
+
   /* El enrutador pide las pantallas por aquí; cada una la pinta su módulo */
   return {
     entrar: GestionAcceso.entrar,
@@ -619,7 +626,7 @@ window.VistasGestor = (function () {
     portafolios: GestionPortafolios.portafolios,
     agenda: GestionAgenda.agenda,
     eos: GestionEos.eos,
-    admin: GestionAdmin.admin,
+    admin: admin,
     aprender: GestionAprender.aprender,
     herramientas: GestionAprender.herramientas,
     artefactos: GestionAprender.artefactos,

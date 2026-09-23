@@ -54,6 +54,10 @@ No hace falta `PORT` (lo inyecta el proveedor) ni `HOST` (la imagen ya escucha e
 Tampoco `PGADMIN_USER`: definirlo haría que el migrador intente crear un rol, que es justo lo
 que estas plataformas no permiten.
 
+Ni `DOCS_ACTIVAS`: la documentación de la API (`/api/docs` y `/api/openapi.json`) se publica
+**sin sesión**, así que con `NODE_ENV=production` nace apagada y esas dos rutas responden
+`401`. Añade `DOCS_ACTIVAS=true` solo si quieres publicarla a quien entre a la URL.
+
 Genera el secreto con:
 
 ```bash

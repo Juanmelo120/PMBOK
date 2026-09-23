@@ -145,6 +145,22 @@ module.exports = {
     limiteBytes: entero(process.env.ARCHIVO_LIMITE_MB, 10) * 1024 * 1024
   },
 
+  /* Documentación de la API: /api/docs (Scalar) y /api/openapi.json */
+  docs: {
+    /* Se publican sin sesion, asi que en produccion nacen apagadas: no hay
+       por que regalar el mapa de la API a quien pase por la URL. Fuera de
+       produccion estan encendidas, y DOCS_ACTIVAS manda en los dos casos. */
+    activas: (function () {
+      var pedido = String(process.env.DOCS_ACTIVAS || '').trim().toLowerCase();
+      if (pedido === 'true') return true;
+      if (pedido === 'false') return false;
+      return process.env.NODE_ENV !== 'production';
+    })(),
+    /* Scalar descarga su interfaz de jsdelivr. Apuntando DOCS_CDN a una
+       copia servida por el propio servidor, la página funciona sin internet. */
+    cdn: String(process.env.DOCS_CDN || '').trim()
+  },
+
   acceso: {
     intentosMaximos: entero(process.env.LOGIN_INTENTOS, 10),
     ventanaMinutos: entero(process.env.LOGIN_VENTANA_MIN, 15)

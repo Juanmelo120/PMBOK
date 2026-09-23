@@ -2,6 +2,7 @@
    app.js — Aplicación Express
    ───────────────────────────────────────────────────────────
    /api/...        API REST (JSON)
+   /api/docs       documentación de la API (Scalar)
    /  y /assets    la interfaz existente del proyecto, servida
                    desde la carpeta raíz (solo index.html y assets)
    ═══════════════════════════════════════════════════════════ */
@@ -17,6 +18,7 @@ const catalogo = require('./catalogo');
 const errores = require('./errores');
 const { requerirSesion } = require('./middleware/auth');
 const rutasAuth = require('./rutas/auth');
+const rutasDocs = require('./rutas/docs');
 const { usuarios, permisos } = require('./rutas/usuarios');
 const { proyectos, planas } = require('./rutas/proyectos');
 const org = require('./rutas/organizacion');
@@ -69,6 +71,8 @@ function crearApp() {
   });
   app.use('/api/catalogo', org.catalogo);
   app.use('/api/auth', rutasAuth);
+  /* La documentación describe la API, no devuelve datos: va sin sesión */
+  if (config.docs.activas) app.use('/api', rutasDocs);
 
   /* ── Con sesión ── */
   app.use('/api', requerirSesion);
