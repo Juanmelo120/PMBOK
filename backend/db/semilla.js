@@ -20,10 +20,16 @@ async function sembrar(cx) {
   let adminCreado = false;
   if (!hayAdmin) {
     const hash = await bcrypt.hash(config.admin.clave, 10);
-    /* La contraseña inicial es conocida: hay que cambiarla al entrar */
+    /* La contraseña inicial es conocida: hay que cambiarla al entrar.
+       El id fijo «u-admin» solo se usa si está libre: si esa fila sigue ahí
+       con otro correo (la cuenta se degradó, se desactivó o se le cambió el
+       correo), reutilizarlo rompía la clave primaria y el servidor no
+       arrancaba, justo cuando hace falta recuperar el acceso. */
     await db.consulta(
       `INSERT INTO usuarios (id, nombre, correo, clave_hash, rol, debe_cambiar_clave)
-       VALUES ('u-admin', $1, $2, $3, 'admin', true)
+       VALUES (CASE WHEN EXISTS (SELECT 1 FROM usuarios WHERE id = 'u-admin')
+                    THEN gen_random_uuid()::text ELSE 'u-admin' END,
+               $1, $2, $3, 'admin', true)
        ON CONFLICT (correo) DO UPDATE SET rol = 'admin', activo = true`,
       [config.admin.nombre, config.admin.correo, hash], cx);
     adminCreado = true;

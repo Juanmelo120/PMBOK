@@ -6,6 +6,8 @@
 const { describe, it, before, after } = require('node:test');
 const assert = require('node:assert/strict');
 const { iniciar, ADMIN } = require('../ayuda');
+const { sembrar } = require('../../db/semilla');
+const db = require('../../src/db');
 
 describe('HU-01 Acceso y sesiones', () => {
   let e;
@@ -112,5 +114,41 @@ describe('HU-01 Acceso y sesiones', () => {
     const r = await e.admin.get('/api/no-existe');
     assert.equal(r.estado, 404);
     assert.equal(r.datos.codigo, 'NO_ENCONTRADO');
+  });
+
+  /* Quedarse sin administrador es el peor momento para que el servidor no
+     arranque: al reiniciar tiene que recuperar el acceso, no caerse. */
+  it('CA-12 si se borra la cuenta de administrador, al reiniciar se vuelve a crear', async () => {
+    await db.consulta("DELETE FROM usuarios WHERE rol = 'admin'");
+    const r = await db.transaccion((cx) => sembrar(cx));
+    assert.equal(r.adminCreado, true);
+
+    const fila = await db.uno("SELECT id, rol, activo, debe_cambiar_clave FROM usuarios WHERE correo = $1",
+      [ADMIN.correo]);
+    assert.equal(fila.rol, 'admin');
+    assert.equal(fila.activo, true);
+    assert.equal(fila.debe_cambiar_clave, true, 'la clave inicial es conocida: se cambia al entrar');
+
+    const entrada = await e.anonimo.post('/api/auth/entrar', { correo: ADMIN.correo, clave: ADMIN.clave });
+    assert.equal(entrada.estado, 200);
+  });
+
+  it('CA-13 se recupera el administrador aunque el id «u-admin» esté ocupado por otra cuenta', async () => {
+    await db.consulta("DELETE FROM usuarios WHERE rol = 'admin'");
+    /* Una cuenta que conserva el id fijo pero ya no es la administradora:
+       reutilizar ese id rompía la clave primaria y el arranque entero. */
+    await db.consulta(
+      `INSERT INTO usuarios (id, nombre, correo, clave_hash, rol)
+       VALUES ('u-admin', 'Antigua cuenta', 'antigua@pmbok.local', 'x', 'director')`);
+
+    await db.transaccion((cx) => sembrar(cx));
+
+    const nuevo = await db.uno("SELECT id, rol, activo FROM usuarios WHERE correo = $1", [ADMIN.correo]);
+    assert.ok(nuevo, 'se creó la cuenta administradora');
+    assert.equal(nuevo.rol, 'admin');
+    assert.notEqual(nuevo.id, 'u-admin', 'con un id propio, sin pisar el ocupado');
+
+    const vieja = await db.uno("SELECT rol FROM usuarios WHERE id = 'u-admin'");
+    assert.equal(vieja.rol, 'director', 'la cuenta que ocupaba el id se queda como estaba');
   });
 });
